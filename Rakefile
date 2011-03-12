@@ -5,8 +5,12 @@ GEMSPEC = "#{PACKAGE}.gemspec"
 DOC_OUTPUT_DIR = '../gh-pages/rdoc'
 RUBY_FILES = FileList['**/*.rb']
 
+def load_gem(spec)
+  eval File.open(spec).readlines.join('')
+end
+
 def gem_name(spec)
-  gem = eval File.open(spec).readlines.join('')
+  gem = load_gem(spec)
   "#{PACKAGE}-#{gem.version.to_s}.gem"
 end
 

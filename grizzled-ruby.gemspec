@@ -2,8 +2,6 @@
 
 Gem::Specification.new do |spec|
 
-  require 'rake'  # for FileList
-
   spec.rubygems_version = '1.3.5'
 
   spec.name             = 'grizzled-ruby'
@@ -17,10 +15,10 @@ Gem::Specification.new do |spec|
 
   spec.authors          = ['Brian M. Clapper']
   spec.email            = 'bmc@clapper.org'
-  spec.homepage         = 'http://github.com/bmc/grizzled-ruby'
+  spec.homepage         = 'https://github.com/bmc/grizzled-ruby'
 
   # = MANIFEST =
-  spec.files            = FileList['lib/**/*.rb'].to_a
+  spec.files            = Dir['lib/**/*.rb']
 end
 
 
