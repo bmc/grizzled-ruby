@@ -25,6 +25,10 @@ It can be built as a gem, but the gem isn't (yet) public.
     require 'grizzled'
     require 'grizzled/unix'
     # etc.
+    
+## API documentation
+
+The [RDoc][]-generated API documents are [here](rdoc/).
 
 ## Author
 
@@ -54,3 +58,4 @@ request. Along with any patch you send:
 [GitHub]: http://github.com/bmc/
 [downloads area]: http://github.com/bmc/grizzled-ruby/downloads
 [bmc@clapper.org]: mailto:bmc@clapper.org
+[RDoc]: http://rdoc.sourceforge.net/
