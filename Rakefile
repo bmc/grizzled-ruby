@@ -1,5 +1,7 @@
 #                                                                  -*- ruby -*-
 
+require 'rake/clean'
+
 PACKAGE = 'grizzled-ruby'
 GEMSPEC = "#{PACKAGE}.gemspec"
 DOC_OUTPUT_DIR = '../gh-pages/rdoc'
@@ -15,6 +17,7 @@ def gem_name(spec)
 end
 
 GEM = gem_name(GEMSPEC)
+CLEAN << GEM
 
 task :default => :build
 
@@ -26,7 +29,7 @@ task :doc => RUBY_FILES do |t|
   require 'rdoc/rdoc'
   puts('Running rdoc...')
   r = RDoc::RDoc.new
-  r.document(['lib'])
+  r.document(['-o', DOC_OUTPUT_DIR, 'lib'])
 end
 
 task :install => :gem do |t|
