@@ -22,8 +22,9 @@ It can be built as a gem, but the gem isn't (yet) public.
 
 ## To use in your code
 
-    require 'grizzled'
+    require 'rubygems'
     require 'grizzled/unix'
+    require 'grizzled/string/template'
     # etc.
     
 ## API documentation
