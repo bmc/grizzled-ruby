@@ -4,7 +4,7 @@ require 'rake/clean'
 
 PACKAGE = 'grizzled-ruby'
 GEMSPEC = "#{PACKAGE}.gemspec"
-DOC_OUTPUT_DIR = '../gh-pages/rdoc'
+DOC_OUTPUT_DIR = '../gh-pages/apidocs'
 RUBY_FILES = FileList['**/*.rb']
 
 def load_gem(spec)

@@ -142,6 +142,7 @@ module Grizzled
       (other.class == Stack) and (other.to_a == to_a)
     end
 
+    # Compare this stack to another element.
     def <=>(other)
       if other.class == Stack
         other.to_a <=> to_a
