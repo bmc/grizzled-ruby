@@ -4,7 +4,8 @@ require 'rake/clean'
 
 PACKAGE = 'grizzled-ruby'
 GEMSPEC = "#{PACKAGE}.gemspec"
-DOC_OUTPUT_DIR = '../gh-pages/apidocs'
+DOC_DIR = 'rdoc'
+DOC_PUBLISH_DIR = '../gh-pages/apidocs'
 RUBY_FILES = FileList['**/*.rb']
 
 def load_gem(spec)
@@ -17,7 +18,7 @@ def gem_name(spec)
 end
 
 GEM = gem_name(GEMSPEC)
-CLEAN << GEM
+CLEAN << [GEM, DOC_DIR]
 
 # ---------------------------------------------------------------------------
 # Tasks
@@ -25,25 +26,43 @@ CLEAN << GEM
 
 task :default => :build
 
+desc "Build everything"
 task :build => [:test, :gem, :doc]
 
+desc "Synonym for 'build'"
+task :all => :build
+
+desc "Build the gem (#{GEM})"
 task :gem => GEM
 
+desc "Build the documentation, locally"
 task :doc => RUBY_FILES do |t|
   require 'rdoc/rdoc'
   puts('Running rdoc...')
   r = RDoc::RDoc.new
-  r.document(['-o', DOC_OUTPUT_DIR, 'lib'])
+  r.document(['-o', DOC_DIR, 'lib'])
 end
 
+desc "Install the gem"
 task :install => :gem do |t|
   sh "gem install #{GEM}"
+end
+
+desc "Publish the docs. Not really of use to anyone but the author"
+task :pubdoc => :doc do |t|
+  require 'pathname'
+  target = Pathname.new(DOC_PUBLISH_DIR).expand_path.to_s
+  cd DOC_DIR do
+    mkdir_p target
+    cp_r '.', target
+  end
 end
 
 file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
   sh "gem build #{GEMSPEC}"
 end  
 
+desc "Run the unit tests"
 task :test do |t|
   FileList[File.join('test', '**', 't[cs]_*.rb')].each do |tf|
     cd File.dirname(tf) do |dir|
