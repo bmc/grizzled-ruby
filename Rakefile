@@ -19,9 +19,13 @@ end
 GEM = gem_name(GEMSPEC)
 CLEAN << GEM
 
+# ---------------------------------------------------------------------------
+# Tasks
+# ---------------------------------------------------------------------------
+
 task :default => :build
 
-task :build => [:gem, :doc]
+task :build => [:test, :gem, :doc]
 
 task :gem => GEM
 
@@ -40,3 +44,10 @@ file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
   sh "gem build #{GEMSPEC}"
 end  
 
+task :test do |t|
+  FileList[File.join('test', '**', 't[cs]_*.rb')].each do |tf|
+    cd File.dirname(tf) do |dir|
+      ruby File.basename(tf)
+    end
+  end
+end
