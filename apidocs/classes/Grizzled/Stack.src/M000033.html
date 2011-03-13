@@ -5,14 +5,16 @@
 
 <html>
 <head>
-  <title>length (Grizzled::Stack)</title>
+  <title>pop_all (Grizzled::Stack)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/stack.rb, line 107</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length</span>
-      <span class="ruby-ivar">@the_stack</span>.<span class="ruby-identifier">length</span>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/stack.rb, line 76</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pop_all</span>
+      <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@the_stack</span>.<span class="ruby-identifier">reverse</span>
+      <span class="ruby-ivar">@the_stack</span>.<span class="ruby-identifier">clear</span>
+      <span class="ruby-identifier">result</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

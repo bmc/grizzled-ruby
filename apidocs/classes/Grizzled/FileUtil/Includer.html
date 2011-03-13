@@ -146,10 +146,10 @@ Preprocess a file containing include directives, then read the result:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000005">each</a>&nbsp;&nbsp;
-      <a href="#M000004">each_line</a>&nbsp;&nbsp;
-      <a href="#M000002">new</a>&nbsp;&nbsp;
-      <a href="#M000003">readlines</a>&nbsp;&nbsp;
+      <a href="#M000029">each</a>&nbsp;&nbsp;
+      <a href="#M000028">each_line</a>&nbsp;&nbsp;
+      <a href="#M000026">new</a>&nbsp;&nbsp;
+      <a href="#M000027">readlines</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -196,19 +196,19 @@ Preprocess a file containing include directives, then read the result:
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000002" class="method-detail">
-        <a name="M000002"></a>
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
 
         <div class="method-heading">
-          <a href="Includer.src/M000002.html" target="Code" class="method-signature"
-            onclick="popupCode('Includer.src/M000002.html');return false;">
+          <a href="Includer.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000026.html');return false;">
           <span class="method-name">new</span><span class="method-args">(source, options={})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Initialize a <a href="Includer.html#M000002">new</a> <tt><a
+Initialize a <a href="Includer.html#M000026">new</a> <tt><a
 href="Includer.html">Includer</a></tt>.
 </p>
 <p>
@@ -216,7 +216,7 @@ Parameters:
 </p>
 <dl>
 <dt><tt>source</tt></dt><dd>A string, representing a file name or URL (http, https or ftp), or an
-object with an <tt><a href="Includer.html#M000004">each_line</a></tt>
+object with an <tt><a href="Includer.html#M000028">each_line</a></tt>
 method that returns individual lines of input.
 
 </dd>
@@ -231,9 +231,9 @@ Options:
 <dt>+:max_nesting+</dt><dd>Maximum include nesting level. Default: 100
 
 </dd>
-<dt>+:include_pattern+</dt><dd>String regex pattern to match include directives. Must have a single regex
-group for the file name or URL. Default:
-^%include\s&quot;([^&quot;]+)&quot;
+<dt>+:include_pattern+</dt><dd><a href="../String.html">String</a> regex pattern to match include
+directives. Must have a single regex group for the file name or URL.
+Default: ^%include\s&quot;([^&quot;]+)&quot;
 
 </dd>
 </dl>
@@ -242,8 +242,8 @@ group for the file name or URL. Default:
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000005" class="method-detail">
-        <a name="M000005"></a>
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
 
         <div class="method-heading">
           <span class="method-name">each</span><span class="method-args">(ignored=nil)</span>
@@ -251,35 +251,35 @@ group for the file name or URL. Default:
       
         <div class="method-description">
           <p>
-Alias for <a href="Includer.html#M000004">each_line</a>
+Alias for <a href="Includer.html#M000028">each_line</a>
 </p>
         </div>
       </div>
 
-      <div id="method-M000004" class="method-detail">
-        <a name="M000004"></a>
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
 
         <div class="method-heading">
-          <a href="Includer.src/M000004.html" target="Code" class="method-signature"
-            onclick="popupCode('Includer.src/M000004.html');return false;">
+          <a href="Includer.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000028.html');return false;">
           <span class="method-name">each_line</span><span class="method-args">(ignored=nil) {|line| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Given a block, passes <a href="Includer.html#M000005">each</a> input line
+Given a block, passes <a href="Includer.html#M000029">each</a> input line
 (after include processing) to the block.
 </p>
         </div>
       </div>
 
-      <div id="method-M000003" class="method-detail">
-        <a name="M000003"></a>
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
 
         <div class="method-heading">
-          <a href="Includer.src/M000003.html" target="Code" class="method-signature"
-            onclick="popupCode('Includer.src/M000003.html');return false;">
+          <a href="Includer.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000027.html');return false;">
           <span class="method-name">readlines</span><span class="method-args">()</span>
           </a>
         </div>
