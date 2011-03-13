@@ -50,7 +50,7 @@ request. Along with any patch you send:
 * Please indicate that you license the work to the PROJECT project
   under a [BSD License][].
 
-[Grizzled Python]: http://software.clapper.org/grizzled/
+[Grizzled Python]: http://software.clapper.org/grizzled-python/
 [Grizzled Scala]: http://software.clapper.org/grizzled-scala/
 [Scala]: http://www.scala-lang.org/
 [Python]: http://www.python.org/
