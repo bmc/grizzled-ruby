@@ -28,7 +28,7 @@ It can be built as a gem, but the gem isn't (yet) public.
     
 ## API documentation
 
-The [RDoc][]-generated API documents are [here](rdoc/).
+The [RDoc][]-generated API documents are [here](apidocs/).
 
 ## Author
 
