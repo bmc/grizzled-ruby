@@ -5,25 +5,15 @@
 
 <html>
 <head>
-  <title>get_variable (Grizzled::String::Template::TemplateBase)</title>
+  <title>new (Grizzled::String::Template::TemplateBase)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 151</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_variable</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">default</span>)
-          
-          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_no_value</span>(<span class="ruby-identifier">default</span>, <span class="ruby-identifier">name</span>)
-            <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">default</span>.<span class="ruby-identifier">nil?</span>
-              <span class="ruby-identifier">default</span>
-            <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@safe</span>
-              <span class="ruby-value str">&quot;&quot;</span>
-            <span class="ruby-keyword kw">else</span>
-              <span class="ruby-identifier">raise</span> <span class="ruby-constant">VariableNotFoundException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>)
-            <span class="ruby-keyword kw">end</span>
-          <span class="ruby-keyword kw">end</span>
-
-          <span class="ruby-identifier">resolver</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">handle_no_value</span>(<span class="ruby-identifier">default</span>, <span class="ruby-identifier">name</span>)
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 93</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">resolver</span>, <span class="ruby-identifier">options</span>={})
+          <span class="ruby-ivar">@resolver</span> = <span class="ruby-identifier">resolver</span>
+          <span class="ruby-ivar">@safe</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:safe</span>, <span class="ruby-keyword kw">true</span>)
         <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

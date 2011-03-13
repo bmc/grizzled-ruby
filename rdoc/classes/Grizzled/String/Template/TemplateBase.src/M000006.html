@@ -5,20 +5,29 @@
 
 <html>
 <head>
-  <title>handle_no_value (Grizzled::String::Template::TemplateBase)</title>
+  <title>substitute (Grizzled::String::Template::TemplateBase)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 153</span>
-          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_no_value</span>(<span class="ruby-identifier">default</span>, <span class="ruby-identifier">name</span>)
-            <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">default</span>.<span class="ruby-identifier">nil?</span>
-              <span class="ruby-identifier">default</span>
-            <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@safe</span>
-              <span class="ruby-value str">&quot;&quot;</span>
-            <span class="ruby-keyword kw">else</span>
-              <span class="ruby-identifier">raise</span> <span class="ruby-constant">VariableNotFoundException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>)
-            <span class="ruby-keyword kw">end</span>
-          <span class="ruby-keyword kw">end</span></pre>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 113</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">substitute</span>(<span class="ruby-identifier">s</span>)
+
+          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">substitute_variable</span>(<span class="ruby-identifier">var</span>, <span class="ruby-identifier">s</span>)
+            <span class="ruby-identifier">end_string</span> = <span class="ruby-identifier">var</span>.<span class="ruby-identifier">iend</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span> <span class="ruby-value">? </span><span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">var</span>.<span class="ruby-identifier">iend</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+            <span class="ruby-identifier">value</span> = <span class="ruby-identifier">get_variable</span>(<span class="ruby-identifier">var</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">var</span>.<span class="ruby-identifier">default</span>)
+            <span class="ruby-identifier">transformed</span> = 
+              (<span class="ruby-identifier">var</span>.<span class="ruby-identifier">istart</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">var</span>.<span class="ruby-identifier">istart</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)]) <span class="ruby-operator">+</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">end_string</span>
+            <span class="ruby-identifier">substitute</span>(<span class="ruby-identifier">transformed</span>)
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-comment cmt"># Locate the next variable reference.</span>
+          <span class="ruby-identifier">var</span> = <span class="ruby-identifier">find_variable_ref</span>(<span class="ruby-identifier">s</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">var</span>.<span class="ruby-identifier">nil?</span>
+            <span class="ruby-identifier">s</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">substitute_variable</span>(<span class="ruby-identifier">var</span>, <span class="ruby-identifier">s</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

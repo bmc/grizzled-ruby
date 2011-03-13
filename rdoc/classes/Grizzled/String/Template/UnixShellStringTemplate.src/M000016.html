@@ -5,41 +5,17 @@
 
 <html>
 <head>
-  <title>find_variable_ref (Grizzled::String::Template::UnixShellStringTemplate)</title>
+  <title>new (Grizzled::String::Template::UnixShellStringTemplate)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 274</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_variable_ref</span>(<span class="ruby-identifier">s</span>)
-
-          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_long_match</span>(<span class="ruby-identifier">m</span>)
-            <span class="ruby-identifier">name</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>]
-            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span>
-              <span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>
-            <span class="ruby-keyword kw">else</span>
-              <span class="ruby-comment cmt"># Pull off the &quot;?&quot;</span>
-              <span class="ruby-identifier">default</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>][<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
-            <span class="ruby-keyword kw">end</span>
-
-            <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">default</span>)
-          <span class="ruby-keyword kw">end</span>
-
-          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_no_long_match</span>(<span class="ruby-identifier">s</span>)
-            <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@short_var_regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
-            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">nil?</span>
-              <span class="ruby-keyword kw">nil</span>
-            <span class="ruby-keyword kw">else</span>
-              <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>], <span class="ruby-keyword kw">nil</span>)
-            <span class="ruby-keyword kw">end</span>
-          <span class="ruby-keyword kw">end</span>
-
-          <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@long_var_regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
-          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">nil?</span>
-            <span class="ruby-identifier">handle_no_long_match</span>(<span class="ruby-identifier">s</span>)
-          <span class="ruby-keyword kw">else</span>
-            <span class="ruby-identifier">handle_long_match</span>(<span class="ruby-identifier">m</span>)
-          <span class="ruby-keyword kw">end</span>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 208</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">resolver</span>, <span class="ruby-identifier">options</span>={})
+          <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">resolver</span>, <span class="ruby-identifier">options</span>)
+          <span class="ruby-identifier">var_re</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:var_pattern</span>, <span class="ruby-value str">&quot;[A-Za-z0-9_]+&quot;</span>)
+          <span class="ruby-ivar">@long_var_regexp</span> = <span class="ruby-node">%r{\$\{(#{var_re})(\?[^\}]*)?\}}</span>
+          <span class="ruby-ivar">@short_var_regexp</span> = <span class="ruby-node">%r{\$(#{var_re})}</span>
         <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>
