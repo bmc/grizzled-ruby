@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Grizzled::String::Template::UnixShellStringTemplate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Grizzled::String::Template::UnixShellStringTemplate</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../../files/lib/grizzled/string/template_rb.html">
+                lib/grizzled/string/template.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="TemplateBase.html">
+                TemplateBase
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A string template that uses the <a href="../../Unix.html">Unix</a>
+shell-like syntax +${varname}+ (or +$varname+) for variable references. A
+variable&#8216;s name typically consists of alphanumerics and underscores,
+but is controlled by the a supplied regular expression. To include a
+literal &quot;$&quot; in a string, escape it with a backslash.
+</p>
+<p>
+For this class, the general form of a variable reference is:
+</p>
+<pre>
+    ${varname?default}
+</pre>
+<p>
+The +?default+ suffix is optional and specifies a default value to be used
+if the variable has no value.
+</p>
+<p>
+A shorthand form of a variable reference is:
+</p>
+<pre>
+    $varname
+</pre>
+<p>
+The <em>default</em> capability is not available in the shorthand form.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000020">find_variable_ref</a>&nbsp;&nbsp;
+      <a href="#M000021">handle_long_match</a>&nbsp;&nbsp;
+      <a href="#M000019">handle_match</a>&nbsp;&nbsp;
+      <a href="#M000022">handle_no_long_match</a>&nbsp;&nbsp;
+      <a href="#M000016">new</a>&nbsp;&nbsp;
+      <a href="#M000018">pre_sub</a>&nbsp;&nbsp;
+      <a href="#M000017">substitute</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ESCAPED_DOLLAR_PLACEHOLDER</td>
+          <td>=</td>
+          <td class="context-item-value">&quot;\001&quot;</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ESCAPED_DOLLAR</td>
+          <td>=</td>
+          <td class="context-item-value">%r{(\\*)(\\\$)}</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000016.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(resolver, options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Initialize a <a href="UnixShellStringTemplate.html#M000016">new</a> <tt><a
+href="UnixShellStringTemplate.html">UnixShellStringTemplate</a></tt>.
+Supports various hash options.
+</p>
+<p>
+Parameters:
+</p>
+<dl>
+<dt><tt>resolver</tt></dt><dd>A hash-like object that can take a variable name (via the +[]+ function)
+and resolve its value, returning the value (which is converted to string)
+or <tt>nil</tt>.
+
+</dd>
+<dt><tt>options</tt></dt><dd>hash of options. See below.
+
+</dd>
+</dl>
+<p>
+Options:
+</p>
+<dl>
+<dt>+:safe+</dt><dd><tt>true</tt> for a safe template that substitutes a blank string for a
+non-existent variable, instead of throwing an exception. Defaults to
+<tt>true</tt>.
+
+</dd>
+<dt>+:var_pattern+</dt><dd>Regular expression pattern (as a string, not a Regexp object) to match a
+variable name. Defaults to &quot;[A-Za-z0-9_]+&quot;
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000020.html');return false;">
+          <span class="method-name">find_variable_ref</span><span class="method-args">(s)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Parse the location of the first variable in the string. Subclasses should
+override this method.
+</p>
+<p>
+Parameters:
+</p>
+<dl>
+<dt><tt>s</tt></dt><dd>the string
+
+</dd>
+</dl>
+<p>
+Returns a <tt><a href="Variable.html">Variable</a></tt> object, or
+<tt>nil</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000021.html');return false;">
+          <span class="method-name">handle_long_match</span><span class="method-args">(m)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000019.html');return false;">
+          <span class="method-name">handle_match</span><span class="method-args">(m, s)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000022.html');return false;">
+          <span class="method-name">handle_no_long_match</span><span class="method-args">(s)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000018.html');return false;">
+          <span class="method-name">pre_sub</span><span class="method-args">(s)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Kludge to handle escaped &quot;$&quot;. Temporarily replace it with
+something highly unlikely to be in the string. Then, put a single
+&quot;$&quot; in its place, after the substitution. Must be sure to handle
+even versus odd number of backslash characters.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="UnixShellStringTemplate.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('UnixShellStringTemplate.src/M000017.html');return false;">
+          <span class="method-name">substitute</span><span class="method-args">(s)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace all variable references in the given string. <a
+href="Variable.html">Variable</a> references are recognized per the regular
+expression passed to the constructor. If a referenced variable is not found
+in the resolver, this method either:
+</p>
+<ul>
+<li>throws a <tt><a
+href="VariableNotFoundException.html">VariableNotFoundException</a></tt>
+(if <tt>safe</tt> is <tt>false</tt>).
+
+</li>
+<li>substitutes an empty string (if <tt>safe</tt> is <tt>true</tt>)
+
+</li>
+</ul>
+<p>
+Recursive references are supported (but beware of infinite recursion).
+</p>
+<p>
+Parameters:
+</p>
+<dl>
+<dt><tt>s</tt></dt><dd>the string in which to replace variable references
+
+</dd>
+</dl>
+<p>
+Returns the substituted result.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
