@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/stack.rb, line 67</span>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/stack.rb, line 72</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pop</span>
       <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@the_stack</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@pop_empty_nil</span>)
         <span class="ruby-identifier">raise</span> <span class="ruby-constant">StackUnderflowException</span>.<span class="ruby-identifier">new</span>

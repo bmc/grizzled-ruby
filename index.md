@@ -13,6 +13,13 @@ libraries, for [Python][] and [Scala][], respectively.
 
 It can be built as a gem, but the gem isn't (yet) public.
 
+This library contains a variety of potentially useful modules, including:
+
+* An include file preprocessor
+* A variable-substitution library reminiscent of Python's `StringTemplate`
+  module
+* A directory-walking API
+
 ## To build
 
 First, ensure that you have both `rubygems` and `rake` installed. Then:
