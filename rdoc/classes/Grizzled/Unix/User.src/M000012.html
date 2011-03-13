@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>run_as (Grizzled::Unix::User)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/unix.rb, line 73</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_as</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+
+        <span class="ruby-comment cmt"># Fork the child process. Process.fork will run a given block of</span>
+        <span class="ruby-comment cmt"># code in the child process.</span>
+        <span class="ruby-identifier">child</span> = <span class="ruby-constant">Process</span>.<span class="ruby-identifier">fork</span> <span class="ruby-keyword kw">do</span>
+          <span class="ruby-comment cmt"># We're in the child. Set the process's user ID.</span>
+          <span class="ruby-constant">Process</span>.<span class="ruby-identifier">uid</span> = <span class="ruby-ivar">@pwent</span>.<span class="ruby-identifier">uid</span>
+
+          <span class="ruby-comment cmt"># Invoke the caller's block of code.</span>
+          <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-keyword kw">self</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-constant">Process</span>.<span class="ruby-identifier">waitpid</span>(<span class="ruby-identifier">child</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

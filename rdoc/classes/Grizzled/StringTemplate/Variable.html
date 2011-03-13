@@ -5,10 +5,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: Grizzled::Directory</title>
+  <title>Class: Grizzled::StringTemplate::Variable</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
-  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
   <script type="text/javascript">
   // <![CDATA[
 
@@ -50,13 +50,13 @@
         <table class="header-table">
         <tr class="top-aligned-row">
           <td><strong>Class</strong></td>
-          <td class="class-name-in-header">Grizzled::Directory</td>
+          <td class="class-name-in-header">Grizzled::StringTemplate::Variable</td>
         </tr>
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/grizzled/dir_rb.html">
-                lib/grizzled/dir.rb
+                <a href="../../../files/lib/grizzled/string/template_rb.html">
+                lib/grizzled/string/template.rb
                 </a>
         <br />
             </td>
@@ -80,7 +80,7 @@
 
     <div id="description">
       <p>
-Useful directory-related methods.
+What a parsed variable looks like.
 </p>
 
     </div>
@@ -92,7 +92,7 @@ Useful directory-related methods.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000013">walk</a>&nbsp;&nbsp;
+      <a href="#M000010">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -107,6 +107,34 @@ Useful directory-related methods.
 
 
 
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">default</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">iend</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">istart</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
       
 
 
@@ -114,25 +142,17 @@ Useful directory-related methods.
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
 
         <div class="method-heading">
-          <a href="Directory.src/M000013.html" target="Code" class="method-signature"
-            onclick="popupCode('Directory.src/M000013.html');return false;">
-          <span class="method-name">walk</span><span class="method-args">(dirname, &amp;block)</span>
+          <a href="Variable.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('Variable.src/M000010.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(istart, iend, name, default=nil)</span>
           </a>
         </div>
       
         <div class="method-description">
-          <p>
-Walk a directory tree, starting at <em>dirname</em>, invoking the supplied
-block on each directory. The block is passed a <tt><a
-href="../Dir.html">Dir</a></tt> object. The directory is walked top-down,
-not depth-first. To terminate the traversal, the block should return
-<tt>false</tt>. Anything else (including <tt>nil</tt>) continues the
-traversal.
-</p>
         </div>
       </div>
 
