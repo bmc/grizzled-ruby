@@ -15,10 +15,11 @@ It can be built as a gem, but the gem isn't (yet) public.
 
 ## To build
 
+First, ensure that you have both `rubygems` and `rake` installed. Then:
+
     $ git clone git://github.com/bmc/grizzled-ruby.git
     $ cd grizzled-ruby
-    $ gem build grizzled-ruby.gemspec
-    $ gem install grizzled-ruby
+    $ rake install
 
 ## To use in your code
 
