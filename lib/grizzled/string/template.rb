@@ -1,3 +1,10 @@
+# Provides a simple variable substitution capability, similar, in concept,
+# to Python's +StringTemplate+ class. See the Grizzled::String::Template
+# module, the Grizzled::String::UnixShellStringTemplate class and the
+# Grizzled::String::WindowsCmdStringTemplate class for complete details.
+#
+# ---
+#
 # This software is released under a BSD license, adapted from
 # http://opensource.org/licenses/bsd-license.php
 #

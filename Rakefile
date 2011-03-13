@@ -35,12 +35,16 @@ task :all => :build
 desc "Build the gem (#{GEM})"
 task :gem => GEM
 
+file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
+  sh "gem build #{GEMSPEC}"
+end  
+
 desc "Build the documentation, locally"
 task :doc => RUBY_FILES do |t|
   require 'rdoc/rdoc'
   puts('Running rdoc...')
   r = RDoc::RDoc.new
-  r.document(['-o', DOC_DIR, 'lib'])
+  r.document(['-U', '-m', 'lib/grizzled.rb', '-o', DOC_DIR, 'lib'])
 end
 
 desc "Install the gem"
@@ -58,9 +62,8 @@ task :pubdoc => :doc do |t|
   end
 end
 
-file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
-  sh "gem build #{GEMSPEC}"
-end  
+desc "Alias for 'docpub'"
+task :docpub => :pubdoc
 
 desc "Run the unit tests"
 task :test do |t|

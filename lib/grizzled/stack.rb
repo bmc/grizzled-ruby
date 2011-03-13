@@ -1,3 +1,8 @@
+# Provides a simple stack implementation. See the Grizzled::Stack class
+# for complete details.
+#
+# ---
+#
 # This software is released under a BSD license, adapted from
 # http://opensource.org/licenses/bsd-license.php
 #
