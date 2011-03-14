@@ -5,29 +5,20 @@
 
 <html>
 <head>
-  <title>each_line (Grizzled::FileUtil::Includer)</title>
+  <title>new (Grizzled::FileUtil::Includer)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/fileutil/includer.rb, line 152</span>
-      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_line</span>(<span class="ruby-identifier">ignored</span>=<span class="ruby-keyword kw">nil</span>)
-        <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@closed</span>
-          <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@temp</span>.<span class="ruby-identifier">nil?</span>
-            <span class="ruby-identifier">preprocess</span>(<span class="ruby-ivar">@source</span>)
-          <span class="ruby-keyword kw">end</span>
-
-          <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@temp</span>.<span class="ruby-identifier">path</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-            <span class="ruby-identifier">f</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-              <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">line</span>
-            <span class="ruby-keyword kw">end</span>
-          <span class="ruby-keyword kw">end</span>
-
-          <span class="ruby-ivar">@temp</span>.<span class="ruby-identifier">close</span>
-          <span class="ruby-ivar">@temp</span>.<span class="ruby-identifier">unlink</span>
-          <span class="ruby-ivar">@temp</span> = <span class="ruby-keyword kw">nil</span>
-          <span class="ruby-ivar">@closed</span> = <span class="ruby-keyword kw">true</span>
-        <span class="ruby-keyword kw">end</span>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/fileutil/includer.rb, line 137</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>={})
+        <span class="ruby-ivar">@max_nesting</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:max_nesting</span>, <span class="ruby-value">100</span>)
+        <span class="ruby-identifier">inc_pattern</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:include_pattern</span>, <span class="ruby-value str">'^%include\s&quot;([^&quot;]+)&quot;'</span>)
+        <span class="ruby-ivar">@include_re</span> = <span class="ruby-node">/#{inc_pattern}/</span>
+        <span class="ruby-identifier">includer_source</span> = <span class="ruby-identifier">source_to_includer_source</span> <span class="ruby-identifier">source</span>
+        <span class="ruby-ivar">@source_uri</span> = <span class="ruby-identifier">includer_source</span>.<span class="ruby-identifier">uri</span>
+        <span class="ruby-ivar">@temp</span> = <span class="ruby-identifier">preprocess</span> <span class="ruby-identifier">includer_source</span>
+        <span class="ruby-ivar">@input</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-ivar">@temp</span>.<span class="ruby-identifier">path</span>
       <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

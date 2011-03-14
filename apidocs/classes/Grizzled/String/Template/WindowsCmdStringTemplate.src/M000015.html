@@ -5,19 +5,34 @@
 
 <html>
 <head>
-  <title>find_variable_ref (Grizzled::String::Template::WindowsCmdStringTemplate)</title>
+  <title>pre_sub (Grizzled::String::Template::WindowsCmdStringTemplate)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 404</span>
-        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_variable_ref</span>(<span class="ruby-identifier">s</span>)
-          <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@var_re</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
-          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">nil?</span>
-            <span class="ruby-keyword kw">nil</span>
-          <span class="ruby-keyword kw">else</span>
-            <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>], <span class="ruby-keyword kw">nil</span>)
-          <span class="ruby-keyword kw">end</span>
-        <span class="ruby-keyword kw">end</span></pre>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/string/template.rb, line 368</span>
+          <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>)
+
+            <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+              <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span>) <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                <span class="ruby-comment cmt"># Odd number of backslashes before &quot;%&quot;. Valid escape.</span>
+
+                <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>)
+                <span class="ruby-identifier">start</span> = (<span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">b</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)])
+                <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-constant">ESCAPED_PERCENT_PLACEHOLDER</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>[<span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>)<span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
+              <span class="ruby-keyword kw">else</span>
+                <span class="ruby-comment cmt"># Even number of backslashes before &quot;%&quot;. Not an escape.</span>
+                <span class="ruby-identifier">s</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-comment cmt"># Check for an escaped &quot;%&quot;</span>
+            <span class="ruby-identifier">m</span> = <span class="ruby-constant">ESCAPED_PERCENT</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+            <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">m</span>)
+              <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">s</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

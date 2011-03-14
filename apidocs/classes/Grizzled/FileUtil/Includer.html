@@ -123,6 +123,12 @@ defaults to 100.
 The include syntax can be changed by passing a different regular expression
 to the <tt><a href="Includer.html">Includer</a></tt> class constructor.
 </p>
+<h2>Supported Methods</h2>
+<p>
+<tt><a href="Includer.html">Includer</a></tt> supports all the methods of
+the <tt>File</tt> class and can be used the same way as a <tt>File</tt>
+object is used.
+</p>
 <h2>Examples</h2>
 <p>
 Preprocess a file containing include directives, then read the result:
@@ -146,10 +152,10 @@ Preprocess a file containing include directives, then read the result:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000029">each</a>&nbsp;&nbsp;
-      <a href="#M000028">each_line</a>&nbsp;&nbsp;
-      <a href="#M000026">new</a>&nbsp;&nbsp;
-      <a href="#M000027">readlines</a>&nbsp;&nbsp;
+      <a href="#M000031">close</a>&nbsp;&nbsp;
+      <a href="#M000030">method_missing</a>&nbsp;&nbsp;
+      <a href="#M000028">new</a>&nbsp;&nbsp;
+      <a href="#M000029">path</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -196,28 +202,28 @@ Preprocess a file containing include directives, then read the result:
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
 
         <div class="method-heading">
-          <a href="Includer.src/M000026.html" target="Code" class="method-signature"
-            onclick="popupCode('Includer.src/M000026.html');return false;">
+          <a href="Includer.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000028.html');return false;">
           <span class="method-name">new</span><span class="method-args">(source, options={})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Initialize a <a href="Includer.html#M000026">new</a> <tt><a
+Initialize a <a href="Includer.html#M000028">new</a> <tt><a
 href="Includer.html">Includer</a></tt>.
 </p>
 <p>
 Parameters:
 </p>
 <dl>
-<dt><tt>source</tt></dt><dd>A string, representing a file name or URL (http, https or ftp), or an
-object with an <tt><a href="Includer.html#M000028">each_line</a></tt>
-method that returns individual lines of input.
+<dt><tt>source</tt></dt><dd>A string, representing a file name or URL (http, https or ftp), a
+<tt>File</tt> object, or an object with an <tt>each_line</tt> method that
+returns individual lines of input.
 
 </dd>
 <dt><tt>options</tt></dt><dd>Various processing options. See below.
@@ -242,51 +248,56 @@ Default: ^%include\s&quot;([^&quot;]+)&quot;
 
       <h3 class="section-bar">Public Instance methods</h3>
 
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="Includer.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000031.html');return false;">
+          <span class="method-name">close</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Force the underlying resource to be closed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="Includer.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000030.html');return false;">
+          <span class="method-name">method_missing</span><span class="method-args">(m, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Passes unknown calls through to the underlying open file, if they&#8216;re
+supported by the file.
+</p>
+        </div>
+      </div>
+
       <div id="method-M000029" class="method-detail">
         <a name="M000029"></a>
 
         <div class="method-heading">
-          <span class="method-name">each</span><span class="method-args">(ignored=nil)</span>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Alias for <a href="Includer.html#M000028">each_line</a>
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000028" class="method-detail">
-        <a name="M000028"></a>
-
-        <div class="method-heading">
-          <a href="Includer.src/M000028.html" target="Code" class="method-signature"
-            onclick="popupCode('Includer.src/M000028.html');return false;">
-          <span class="method-name">each_line</span><span class="method-args">(ignored=nil) {|line| ...}</span>
+          <a href="Includer.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('Includer.src/M000029.html');return false;">
+          <span class="method-name">path</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Given a block, passes <a href="Includer.html#M000029">each</a> input line
-(after include processing) to the block.
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000027" class="method-detail">
-        <a name="M000027"></a>
-
-        <div class="method-heading">
-          <a href="Includer.src/M000027.html" target="Code" class="method-signature"
-            onclick="popupCode('Includer.src/M000027.html');return false;">
-          <span class="method-name">readlines</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Read the entire include file into an array.
+Return the <a href="Includer.html#M000029">path</a> of the original include
+file, if defined. If the original source was a URL, the URL is returned. If
+the source was a string, nil is returned.
 </p>
         </div>
       </div>

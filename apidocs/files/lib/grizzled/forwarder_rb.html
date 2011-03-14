@@ -5,10 +5,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>File: includer.rb</title>
+  <title>File: forwarder.rb</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
-  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
   <script type="text/javascript">
   // <![CDATA[
 
@@ -47,16 +47,16 @@
 
 
   <div id="fileHeader">
-    <h1>includer.rb</h1>
+    <h1>forwarder.rb</h1>
     <table class="header-table">
     <tr class="top-aligned-row">
       <td><strong>Path:</strong></td>
-      <td>lib/grizzled/fileutil/includer.rb
+      <td>lib/grizzled/forwarder.rb
       </td>
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Mon Mar 14 09:19:20 -0400 2011</td>
+      <td>Mon Mar 14 11:10:53 -0400 2011</td>
     </tr>
     </table>
   </div>
@@ -70,9 +70,8 @@
 
     <div id="description">
       <p>
-Provides a file inclusion preprocessor. See the documentation for the <a
-href="../../../../classes/Grizzled/FileUtil/Includer.html">Grizzled::FileUtil::Includer</a>
-class for complete details.
+Provides a module which, when mixed in, can be used to forward all missing
+methods to another object.
 </p>
 <hr size="1"></hr><p>
 This software is released under a BSD license, adapted from <a
@@ -96,10 +95,9 @@ and/or other materials provided with the distribution.
 
 </li>
 <li>Neither the names &quot;clapper.org&quot;, &quot;<a
-href="../../../../classes/Grizzled.html">Grizzled</a> Ruby Library&quot;,
-nor the names of its contributors may be used to endorse or promote
-products derived from this software without specific prior written
-permission.
+href="../../../classes/Grizzled.html">Grizzled</a> Ruby Library&quot;, nor
+the names of its contributors may be used to endorse or promote products
+derived from this software without specific prior written permission.
 
 </li>
 </ul>
@@ -123,11 +121,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <h3 class="section-bar">Required files</h3>
 
       <div class="name-list">
-      open-uri&nbsp;&nbsp;
-      uri&nbsp;&nbsp;
-      pathname&nbsp;&nbsp;
-      grizzled/stack&nbsp;&nbsp;
-      tempfile&nbsp;&nbsp;
+      set&nbsp;&nbsp;
       </div>
     </div>
 
