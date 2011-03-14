@@ -52,6 +52,11 @@ task :install => :gem do |t|
   sh "gem install #{GEM}"
 end
 
+desc "Publish the gem"
+task :publish => :gem do |t|
+  sh "gem push #{GEM}"
+end
+
 desc "Publish the docs. Not really of use to anyone but the author"
 task :pubdoc => :doc do |t|
   require 'pathname'
