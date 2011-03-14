@@ -19,6 +19,7 @@ This library contains a variety of potentially useful modules, including:
 * A variable-substitution library reminiscent of Python's `StringTemplate`
   module
 * A directory-walking API
+* A mixin that makes forwarding method calls easier.
 
 ## To install from RubyGems.org
 
