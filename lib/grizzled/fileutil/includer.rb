@@ -40,7 +40,7 @@
 require 'open-uri'
 require 'uri'
 require 'pathname'
-require 'grizzled/stack'
+require 'grizzled/forwarder'
 require 'tempfile'
 
 module Grizzled
@@ -116,6 +116,7 @@ module Grizzled
     class Includer
 
       include Enumerable
+      include Grizzled::Forwarder
 
       attr_reader :name, :max_nesting
 
@@ -142,6 +143,7 @@ module Grizzled
         @source_uri = includer_source.uri
         @temp = preprocess includer_source
         @input = File.open @temp.path
+        forward_to @input
       end
 
       # Return the path of the original include file, if defined. If the
@@ -149,16 +151,6 @@ module Grizzled
       # string, nil is returned.
       def path
         @source_uri.path
-      end
-
-      # Passes unknown calls through to the underlying open file, if they're
-      # supported by the file.
-      def method_missing(m, *args, &block)
-        if @input.respond_to? m
-          @input.send(m, *args, &block)
-        else
-          raise NoMethodError.new("Undefined method '#{m}' for #{self.class}")
-        end
       end
 
       # Force the underlying resource to be closed.
