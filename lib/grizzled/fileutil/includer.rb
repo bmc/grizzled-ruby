@@ -97,6 +97,11 @@ module Grizzled
     # The include syntax can be changed by passing a different regular
     # expression to the +Includer+ class constructor.
     #
+    # == Supported Methods
+    #
+    # +Includer+ supports all the methods of the +File+ class and can be
+    # used the same way as a +File+ object is used.
+    #
     # == Examples
     #
     # Preprocess a file containing include directives, then read the result:
@@ -119,8 +124,8 @@ module Grizzled
       # Parameters:
       #
       # [+source+]  A string, representing a file name or URL (http, https or
-      #             ftp), or an object with an +each_line+ method that returns
-      #             individual lines of input.
+      #             ftp), a +File+ object, or an object with an +each_line+
+      #             method that returns individual lines of input.
       # [+options+] Various processing options. See below.
       #
       # Options:
@@ -133,46 +138,50 @@ module Grizzled
         @max_nesting = options.fetch(:max_nesting, 100)
         inc_pattern = options.fetch(:include_pattern, '^%include\s"([^"]+)"')
         @include_re = /#{inc_pattern}/
-        @temp = nil
-        @source = source
-        @closed = false
+        includer_source = source_to_includer_source source
+        @source_uri = includer_source.uri
+        @temp = preprocess includer_source
+        @input = File.open @temp.path
       end
 
-      # Read the entire include file into an array.
-      def readlines
-        a = []
-        each_line do |line|
-          a << line
-        end
-        a
+      # Return the path of the original include file, if defined. If the
+      # original source was a URL, the URL is returned. If the source was a
+      # string, nil is returned.
+      def path
+        @source_uri.path
       end
 
-      # Given a block, passes each input line (after include processing)
-      # to the block.
-      def each_line(ignored=nil)
-        if not @closed
-          if @temp.nil?
-            preprocess(@source)
-          end
-
-          File.open(@temp.path) do |f|
-            f.each_line do |line|
-              yield line
-            end
-          end
-
-          @temp.close
-          @temp.unlink
-          @temp = nil
-          @closed = true
+      # Passes unknown calls through to the underlying open file, if they're
+      # supported by the file.
+      def method_missing(m, *args, &block)
+        if @input.respond_to? m
+          @input.send(m, *args, &block)
+        else
+          raise NoMethodError.new("Undefined method '#{m}' for #{self.class}")
         end
       end
 
-      alias :each :each_line
+      # Force the underlying resource to be closed.
+      def close
+        @input.close
+        @temp.unlink
+      end
 
       private
 
-      def preprocess(source)
+      def source_to_includer_source(source)
+        if source.class == String
+          open_source(URI::parse(source))
+        elsif source.class == File
+          open_source(URI::parse(source.path))
+        elsif source.respond_to? :each_line
+          IncludeSource.new(source, nil)
+        else
+          raise IncludeException.new("Bad input of class #{source.class}")
+        end
+      end
+
+      def preprocess(includer_source)
 
         def do_read(input, temp, level)
           input.reader.each_line do |line|
@@ -190,20 +199,15 @@ module Grizzled
           end
         end
 
-        if source.class == String
-          input = open_source(URI::parse(source))
-        elsif source.respond_to? :each_line
-          input = IncludeSource.new(source, nil)
-        else
-          raise IncludeException.new("Bad input of class #{source.class}")
+
+        temp = Tempfile.new('grizzled_includer')
+        begin
+          do_read(includer_source, temp, 1)
+        ensure
+          temp.close
         end
 
-        @temp = Tempfile.new('grizzled_includer')
-        begin
-          do_read(input, @temp, 1)
-        ensure
-          @temp.close
-        end
+        temp
       end
 
       # Handle an include reference.
