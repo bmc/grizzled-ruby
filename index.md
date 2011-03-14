@@ -11,7 +11,7 @@ organized dumping ground for various useful APIs I find I need. It's
 similar, in concept, to my [Grizzled Python][] and [Grizzled Scala][]
 libraries, for [Python][] and [Scala][], respectively.
 
-It can be built as a gem, but the gem isn't (yet) public.
+It can be installed as a [gem][rubygems].
 
 This library contains a variety of potentially useful modules, including:
 
@@ -20,11 +20,19 @@ This library contains a variety of potentially useful modules, including:
   module
 * A directory-walking API
 
-## To build
+## To install from RubyGems.org
 
-First, ensure that you have both `rubygems` and `rake` installed. Then:
+Grizzled Ruby is a [published gem][]. To install, make sure [rubygems][]
+is installed, then run this command. (You may need to run it as *root*,
+depending on your permissions, whether you're using [rvm][], etc.)
 
-    $ git clone git://github.com/bmc/grizzled-ruby.git
+    $ gem install grizzled-ruby
+
+## To build from source
+
+First, ensure that you have both `rubygems` and `rake` installed. Then, either
+clone the [git repository][] or [download the source][] and unpack it. Then:
+
     $ cd grizzled-ruby
     $ rake install
 
@@ -51,7 +59,7 @@ and is released under a [BSD License][].
 ## Patches
 
 I gladly accept patches from their original authors. Feel free to email
-patches to me or to fork the [GitHub repository][] and send me a pull
+patches to me or to fork the [git repository][] and send me a pull
 request. Along with any patch you send:
 
 * Please state that the patch is your original work.
@@ -63,8 +71,12 @@ request. Along with any patch you send:
 [Scala]: http://www.scala-lang.org/
 [Python]: http://www.python.org/
 [BSD License]: license.html
-[GitHub repository]: http://github.com/bmc/grizzled-ruby
+[git repository]: http://github.com/bmc/grizzled-ruby
 [GitHub]: http://github.com/bmc/
 [downloads area]: http://github.com/bmc/grizzled-ruby/downloads
 [bmc@clapper.org]: mailto:bmc@clapper.org
 [RDoc]: http://rdoc.sourceforge.net/
+[rubygems]: http://rubygems.org/
+[published gem]: https://rubygems.org/gems/grizzled-ruby
+[rvm]: http://rvm.beginrescueend.com/
+[download the source]: https://github.com/bmc/grizzled-ruby/archives/master
