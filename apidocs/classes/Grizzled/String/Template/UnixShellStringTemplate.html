@@ -182,30 +182,30 @@ Supports various hash options.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>resolver</tt></dt><dd>A hash-like object that can take a variable name (via the +[]+ function)
+<table>
+<tr><td valign="top"><tt>resolver</tt>:</td><td>A hash-like object that can take a variable name (via the +[]+ function)
 and resolve its value, returning the value (which is converted to string)
 or <tt>nil</tt>.
 
-</dd>
-<dt><tt>options</tt></dt><dd>hash of options. See below.
+</td></tr>
+<tr><td valign="top"><tt>options</tt>:</td><td>hash of options. See below.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Options:
 </p>
-<dl>
-<dt>+:safe+</dt><dd><tt>true</tt> for a safe template that substitutes a blank string for a
+<table>
+<tr><td valign="top">+:safe+:</td><td><tt>true</tt> for a safe template that substitutes a blank string for a
 non-existent variable, instead of throwing an exception. Defaults to
 <tt>true</tt>.
 
-</dd>
-<dt>+:var_pattern+</dt><dd>Regular expression pattern (as a string, not a Regexp object) to match a
+</td></tr>
+<tr><td valign="top">+:var_pattern+:</td><td>Regular expression pattern (as a string, not a Regexp object) to match a
 variable name. Defaults to &quot;[A-Za-z0-9_]+&quot;
 
-</dd>
-</dl>
+</td></tr>
+</table>
         </div>
       </div>
 
@@ -229,11 +229,11 @@ override this method.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>s</tt></dt><dd>the string
+<table>
+<tr><td valign="top"><tt>s</tt>:</td><td>the string
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Returns a <tt><a href="Variable.html">Variable</a></tt> object, or
 <tt>nil</tt>.
@@ -336,11 +336,11 @@ Recursive references are supported (but beware of infinite recursion).
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>s</tt></dt><dd>the string in which to replace variable references
+<table>
+<tr><td valign="top"><tt>s</tt>:</td><td>the string in which to replace variable references
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Returns the substituted result.
 </p>

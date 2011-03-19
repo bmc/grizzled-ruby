@@ -220,29 +220,32 @@ href="Includer.html">Includer</a></tt>.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>source</tt></dt><dd>A string, representing a file name or URL (http, https or ftp), a
+<table>
+<tr><td valign="top">source:</td><td>A string, representing a file name or URL (http, https or ftp), a
 <tt>File</tt> object, or an object with an <tt>each_line</tt> method that
 returns individual lines of input.
 
-</dd>
-<dt><tt>options</tt></dt><dd>Various processing options. See below.
+</td></tr>
+<tr><td valign="top">options:</td><td>Various processing options. See below.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Options:
 </p>
-<dl>
-<dt>+:max_nesting+</dt><dd>Maximum include nesting level. Default: 100
+<p>
+*<b>NOTE</b>*: Options are symbols (e.g., +:recursive+).
+</p>
+<table>
+<tr><td valign="top">max_nesting:</td><td>Maximum include nesting level. Default: 100
 
-</dd>
-<dt>+:include_pattern+</dt><dd><a href="../String.html">String</a> regex pattern to match include
+</td></tr>
+<tr><td valign="top">include_pattern:</td><td><a href="../String.html">String</a> regex pattern to match include
 directives. Must have a single regex group for the file name or URL.
 Default: ^%include\s&quot;([^&quot;]+)&quot;
 
-</dd>
-</dl>
+</td></tr>
+</table>
         </div>
       </div>
 

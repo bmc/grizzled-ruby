@@ -81,18 +81,18 @@ Mixing this module into your class mixes in methods that will allow you to
 <a href="ZipMixin.html#M000028">zip</a> up files. Related modules and
 classes:
 </p>
-<dl>
-<dt>Grizzled::FileUtil::Zipper</dt><dd>A class that includes this module and can be instantiated by itself.
+<table>
+<tr><td valign="top">Grizzled::FileUtil::Zipper:</td><td>A class that includes this module and can be instantiated by itself.
 
-</dd>
-<dt>Grizzled::FileUtil::UnzipMixin</dt><dd>A module mixin for unzipping <a href="ZipMixin.html#M000028">zip</a> files.
+</td></tr>
+<tr><td valign="top">Grizzled::FileUtil::UnzipMixin:</td><td>A module mixin for unzipping <a href="ZipMixin.html#M000028">zip</a> files.
 
-</dd>
-<dt>Grizzled::FileUtil::Unzipper</dt><dd>A class that includes `<a href="UnzipMixin.html">UnzipMixin</a>&#8217; and
+</td></tr>
+<tr><td valign="top">Grizzled::FileUtil::Unzipper:</td><td>A class that includes `<a href="UnzipMixin.html">UnzipMixin</a>&#8217; and
 can be instantiated by itself.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 
     </div>
 
@@ -143,51 +143,54 @@ a directory.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>zip_file</tt></dt><dd>The <a href="ZipMixin.html#M000028">zip</a> file to open. The file is
+<table>
+<tr><td valign="top">zip_file:</td><td>The <a href="ZipMixin.html#M000028">zip</a> file to open. The file is
 created if it doesn&#8216;t already exists.
 
-</dd>
-<dt><tt>directory</tt></dt><dd>The directory whose contents are to be included in the file.
+</td></tr>
+<tr><td valign="top">directory:</td><td>The directory whose contents are to be included in the file.
 
-</dd>
-<dt><tt>options</tt></dt><dd>Options hash, as described below.
+</td></tr>
+<tr><td valign="top">options:</td><td>Options hash, as described below.
 
-</dd>
-<dt>+&amp;select+</dt><dd>If a block (<tt>select</tt>) is given, then <tt><a
+</td></tr>
+<tr><td valign="top">select:</td><td>If a block (<tt>select</tt>) is given, then <tt><a
 href="ZipMixin.html#M000028">zip</a></tt> passes each file or directory to
 the block and only adds the entry to the <a
 href="ZipMixin.html#M000028">zip</a> file if the block returns
 <tt>true</tt>. If no block is given, then all files and directories are
 added (subject also to the +:recursive+ option, below).
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Options:
 </p>
-<dl>
-<dt>+:recursive+</dt><dd>If <tt>false</tt>, only <a href="ZipMixin.html#M000028">zip</a> the files
+<p>
+*<b>NOTE</b>*: Options are symbols (e.g., +:recursive+).
+</p>
+<table>
+<tr><td valign="top">recursive:</td><td>If <tt>false</tt>, only <a href="ZipMixin.html#M000028">zip</a> the files
 in the directory; if <tt>true</tt> (the default), recursively <a
 href="ZipMixin.html#M000028">zip</a> the entire directory.
 
-</dd>
-<dt>+:dir_at_top+</dt><dd>If <tt>false</tt>, don&#8216;t include <a
+</td></tr>
+<tr><td valign="top">dir_at_top:</td><td>If <tt>false</tt>, don&#8216;t include <a
 href="ZipMixin.html#M000028">zip</a> the directory itself (i.e., the
 top-level files will be at the top level of the <a
 href="ZipMixin.html#M000028">zip</a> file). If <tt>true</tt> (the default),
 the the directory itself (the basename) will be the top-level element of
 the <a href="ZipMixin.html#M000028">zip</a> file.
 
-</dd>
-<dt>+:recreate</dt><dd>If <tt>true</tt>, remove the <a href="ZipMixin.html#M000028">zip</a> file
+</td></tr>
+<tr><td valign="top">recreate:</td><td>If <tt>true</tt>, remove the <a href="ZipMixin.html#M000028">zip</a> file
 if it exists already, so it&#8216;s recreated from scratch. If
 <tt>false</tt> (the default), don&#8216;t recreate the <a
 href="ZipMixin.html#M000028">zip</a> file if it doesn&#8216;t exist;
 instead, update the existing file.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Returns:
 </p>

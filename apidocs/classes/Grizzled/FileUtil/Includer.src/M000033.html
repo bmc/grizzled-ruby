@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/fileutil/includer.rb, line 137</span>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/fileutil/includer.rb, line 139</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>={})
         <span class="ruby-ivar">@max_nesting</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:max_nesting</span>, <span class="ruby-value">100</span>)
         <span class="ruby-identifier">inc_pattern</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:include_pattern</span>, <span class="ruby-value str">'^%include\s&quot;([^&quot;]+)&quot;'</span>)

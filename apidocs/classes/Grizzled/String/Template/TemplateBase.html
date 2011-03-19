@@ -155,26 +155,26 @@ Initializer.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>resolver</tt></dt><dd>A hash-like object that can take a variable name (via the +[]+ function)
+<table>
+<tr><td valign="top"><tt>resolver</tt>:</td><td>A hash-like object that can take a variable name (via the +[]+ function)
 and resolve its value, returning the value (which is converted to string)
 or <tt>nil</tt>.
 
-</dd>
-<dt><tt>options</tt></dt><dd>hash of options. See below.
+</td></tr>
+<tr><td valign="top"><tt>options</tt>:</td><td>hash of options. See below.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Options:
 </p>
-<dl>
-<dt>+:safe+</dt><dd><tt>true</tt> for a safe template that substitutes a blank string for a
+<table>
+<tr><td valign="top">+:safe+:</td><td><tt>true</tt> for a safe template that substitutes a blank string for a
 non-existent variable, instead of throwing an exception. Defaults to
 <tt>true</tt>.
 
-</dd>
-</dl>
+</td></tr>
+</table>
         </div>
       </div>
 
@@ -198,11 +198,11 @@ override this method.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>s</tt></dt><dd>the string
+<table>
+<tr><td valign="top"><tt>s</tt>:</td><td>the string
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Returns a <tt><a href="Variable.html">Variable</a></tt> object, or
 <tt>nil</tt>.
@@ -228,14 +228,14 @@ exception, depending on the setting of <tt>safe</tt>.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>name</tt></dt><dd><a href="Variable.html">Variable</a> name
+<table>
+<tr><td valign="top"><tt>name</tt>:</td><td><a href="Variable.html">Variable</a> name
 
-</dd>
-<dt><tt>default</tt></dt><dd>Default value, or <tt>nil</tt>
+</td></tr>
+<tr><td valign="top"><tt>default</tt>:</td><td>Default value, or <tt>nil</tt>
 
-</dd>
-</dl>
+</td></tr>
+</table>
         </div>
       </div>
 
@@ -286,11 +286,11 @@ Recursive references are supported (but beware of infinite recursion).
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>s</tt></dt><dd>the string in which to replace variable references
+<table>
+<tr><td valign="top"><tt>s</tt>:</td><td>the string in which to replace variable references
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Returns the substituted result.
 </p>

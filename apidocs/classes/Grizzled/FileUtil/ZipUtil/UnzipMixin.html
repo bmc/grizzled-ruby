@@ -81,18 +81,18 @@ use this class. Mixing this module into your class mixes in methods that
 will allow you to <a href="UnzipMixin.html#M000029">unzip</a> zip files.
 Related modules and classes:
 </p>
-<dl>
-<dt>Grizzled::FileUtil::Zipper</dt><dd>A class that includes this module and can be instantiated by itself.
+<table>
+<tr><td valign="top">Grizzled::FileUtil::Zipper:</td><td>A class that includes this module and can be instantiated by itself.
 
-</dd>
-<dt>Grizzled::FileUtil::ZipMixin</dt><dd>A module mixin for zipping zip files.
+</td></tr>
+<tr><td valign="top">Grizzled::FileUtil::ZipMixin:</td><td>A module mixin for zipping zip files.
 
-</dd>
-<dt>Grizzled::FileUtil::Unzipper</dt><dd>A class that includes `<a href="UnzipMixin.html">UnzipMixin</a>&#8217; and
+</td></tr>
+<tr><td valign="top">Grizzled::FileUtil::Unzipper:</td><td>A class that includes `<a href="UnzipMixin.html">UnzipMixin</a>&#8217; and
 can be instantiated by itself.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 
     </div>
 
@@ -143,39 +143,45 @@ Unzips a zip file into a directory.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>zip_file</tt></dt><dd>The zip file to <a href="UnzipMixin.html#M000029">unzip</a>.
+<table>
+<tr><td valign="top">zip_file:</td><td>The zip file to <a href="UnzipMixin.html#M000029">unzip</a>.
 
-</dd>
-<dt><tt>directory</tt></dt><dd>The directory into which to <a href="UnzipMixin.html#M000029">unzip</a> the
+</td></tr>
+<tr><td valign="top">directory:</td><td>The directory into which to <a href="UnzipMixin.html#M000029">unzip</a> the
 file. The directory is created if it doesn&#8216;t already exist.
 
-</dd>
-<dt><tt>options</tt></dt><dd>Options hash, as described below.
+</td></tr>
+<tr><td valign="top">options:</td><td>Options hash, as described below.
 
-</dd>
-<dt>+&amp;select+</dt><dd>If a block (<tt>select</tt>) is given, then <tt><a
+</td></tr>
+<tr><td valign="top">select:</td><td>If a block (<tt>select</tt>) is given, then <tt><a
 href="UnzipMixin.html#M000029">unzip</a></tt> passes each zip file entry
 name to the block and only unzips the entry if the block returns
 <tt>true</tt>. If no block is given, then everything is unzipped (subject
-also to the +:recursive+ option, below).
+also to
 
-</dd>
-</dl>
+<pre>
+ the +:recursive+ option, below).
+</pre>
+</td></tr>
+</table>
 <p>
 Options:
 </p>
-<dl>
-<dt>+:recursive+</dt><dd>If <tt>false</tt>, only extract the top-level files from the zip file. If
+<p>
+*<b>NOTE</b>*: Options are symbols (e.g., +:recursive+).
+</p>
+<table>
+<tr><td valign="top">recursive:</td><td>If <tt>false</tt>, only extract the top-level files from the zip file. If
 <tt>true</tt> (the default), recursively extract everything.
 
-</dd>
-<dt>+:overwrite+</dt><dd>If <tt>false</tt> (the default), do not overwrite existing files in the
+</td></tr>
+<tr><td valign="top">overwrite:</td><td>If <tt>false</tt> (the default), do not overwrite existing files in the
 directory. If <tt>true</tt>, overwrite any existing files in the directory
 with extracted zip files whose names match.
 
-</dd>
-</dl>
+</td></tr>
+</table>
 <p>
 Example:
 </p>
@@ -211,15 +217,15 @@ extracting them.
 <p>
 Parameters:
 </p>
-<dl>
-<dt><tt>zip_file</tt></dt><dd>The zip file to <a href="UnzipMixin.html#M000029">unzip</a>.
+<table>
+<tr><td valign="top">zip_file:</td><td>The zip file to <a href="UnzipMixin.html#M000029">unzip</a>.
 
-</dd>
-<dt><tt>block</tt></dt><dd>Block to execute on each entry. If omitted, an Enumerator is returned. The
+</td></tr>
+<tr><td valign="top">block:</td><td>Block to execute on each entry. If omitted, an Enumerator is returned. The
 block receives a string representing the path of the item in the file.
 
-</dd>
-</dl>
+</td></tr>
+</table>
         </div>
       </div>
 
