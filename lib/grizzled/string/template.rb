@@ -81,14 +81,14 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+resolver+] A hash-like object that can take a variable name (via
+        # +resolver+:: A hash-like object that can take a variable name (via
         #              the +[]+ function) and resolve its value, returning
         #              the value (which is converted to string) or +nil+.
-        # [+options+]  hash of options. See below.
+        # +options+::  hash of options. See below.
         #
         # Options:
         #
-        # [+:safe+]    +true+ for a safe template that substitutes a blank
+        # +:safe+::    +true+ for a safe template that substitutes a blank
         #              string for a non-existent variable, instead of
         #              throwing an exception. Defaults to +true+.
         def initialize(resolver, options={})
@@ -108,7 +108,7 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+s+] the string in which to replace variable references
+        # +s+:: the string in which to replace variable references
         #
         # Returns the substituted result.
         def substitute(s)
@@ -135,7 +135,7 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+s+] the string
+        # +s+:: the string
         #
         # Returns a +Variable+ object, or +nil+.
         def find_variable_ref(s)
@@ -147,8 +147,8 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+name+]    Variable name
-        # [+default+] Default value, or +nil+
+        # +name+::    Variable name
+        # +default+:: Default value, or +nil+
         def get_variable(name, default)
           
           def handle_no_value(default, name)
@@ -193,17 +193,17 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+resolver+] A hash-like object that can take a variable name (via
+        # +resolver+:: A hash-like object that can take a variable name (via
         #              the +[]+ function) and resolve its value, returning
         #              the value (which is converted to string) or +nil+.
-        # [+options+]  hash of options. See below.
+        # +options+::  hash of options. See below.
         #
         # Options:
         #
-        # [+:safe+]         +true+ for a safe template that substitutes a blank
+        # +:safe+::         +true+ for a safe template that substitutes a blank
         #                   string for a non-existent variable, instead of
         #                   throwing an exception. Defaults to +true+.
-        # [+:var_pattern+]  Regular expression pattern (as a string, not a
+        # +:var_pattern+::  Regular expression pattern (as a string, not a
         #                   Regexp object) to match a variable name. Defaults
         #                   to "[A-Za-z0-9_]+"
         def initialize(resolver, options={})
@@ -225,7 +225,7 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+s+] the string in which to replace variable references
+        # +s+:: the string in which to replace variable references
         #
         # Returns the substituted result.
         def substitute(s)
@@ -269,7 +269,7 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+s+] the string
+        # +s+:: the string
         #
         # Returns a +Variable+ object, or +nil+.
         def find_variable_ref(s)
@@ -319,17 +319,17 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+resolver+] A hash-like object that can take a variable name (via
+        # +resolver+:: A hash-like object that can take a variable name (via
         #              the +[]+ function) and resolve its value, returning
         #              the value (which is converted to string) or +nil+.
-        # [+options+]  hash of options. See below.
+        # +options+::  hash of options. See below.
         #
         # Options:
         #
-        # [+:safe+]         +true+ for a safe template that substitutes a blank
+        # +:safe+::         +true+ for a safe template that substitutes a blank
         #                   string for a non-existent variable, instead of
         #                   throwing an exception. Defaults to +true+.
-        # [+:var_pattern+]  Regular expression pattern (as a string, not a
+        # +:var_pattern+::  Regular expression pattern (as a string, not a
         #                   Regexp object) to match a variable name. Defaults
         #                   to "[A-Za-z0-9_]+"
         def initialize(resolver, options={})
@@ -350,7 +350,7 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+s+] the string in which to replace variable references
+        # +s+:: the string in which to replace variable references
         #
         # Returns the substituted result.
         def substitute(s)
@@ -392,7 +392,7 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+s+] the string
+        # +s+:: the string
         #
         # Returns a +Variable+ object, or +nil+.
         def find_variable_ref(s)

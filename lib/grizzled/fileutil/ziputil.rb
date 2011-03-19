@@ -58,10 +58,10 @@ module Grizzled
       # class mixes in methods that will allow you to zip up files. Related
       # modules and classes:
       #
-      # [Grizzled::FileUtil::Zipper]     A class that includes this module
+      # Grizzled::FileUtil::Zipper::     A class that includes this module
       #                                  and can be instantiated by itself.
-      # [Grizzled::FileUtil::UnzipMixin] A module mixin for unzipping zip files.
-      # [Grizzled::FileUtil::Unzipper]   A class that includes `UnzipMixin'
+      # Grizzled::FileUtil::UnzipMixin:: A module mixin for unzipping zip files.
+      # Grizzled::FileUtil::Unzipper::   A class that includes `UnzipMixin'
       #                                  and can be instantiated by itself.
       module ZipMixin
 
@@ -69,31 +69,33 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+zip_file+]  The zip file to open. The file is created if it doesn't
-        #               already exists.
-        # [+directory+] The directory whose contents are to be included in
-        #               the file.
-        # [+options+]   Options hash, as described below.
-        # [+&select+]   If a block (+select+) is given, then +zip+ passes each
-        #               file or directory to the block and only adds the entry
-        #               to the zip file if the block returns +true+. If no
-        #               block is given, then all files and directories are
-        #               added (subject also to the +:recursive+ option, below).
+        # zip_file::  The zip file to open. The file is created if it doesn't
+        #             already exists.
+        # directory:: The directory whose contents are to be included in
+        #             the file.
+        # options::   Options hash, as described below.
+        # select::    If a block (+select+) is given, then +zip+ passes each
+        #             file or directory to the block and only adds the entry
+        #             to the zip file if the block returns +true+. If no
+        #             block is given, then all files and directories are
+        #             added (subject also to the +:recursive+ option, below).
         #
         # Options:
         #
-        # [+:recursive+]   If +false+, only zip the files in the directory; if
-        #                  +true+ (the default), recursively zip the entire
-        #                  directory.
-        # [+:dir_at_top+]  If +false+, don't include zip the directory itself
-        #                  (i.e., the top-level files will be at the top level
-        #                  of the zip file). If +true+ (the default), the
-        #                  the directory itself (the basename) will be the
-        #                  top-level element of the zip file.
-        # [+:recreate]     If +true+, remove the zip file if it exists already,
-        #                  so it's recreated from scratch. If +false+ (the 
-        #                  default), don't recreate the zip file if it doesn't
-        #                  exist; instead, update the existing file.
+        # **NOTE**: Options are symbols (e.g., +:recursive+).
+        #
+        # recursive::   If +false+, only zip the files in the directory; if
+        #               +true+ (the default), recursively zip the entire
+        #               directory.
+        # dir_at_top::  If +false+, don't include zip the directory itself
+        #               (i.e., the top-level files will be at the top level
+        #               of the zip file). If +true+ (the default), the
+        #               the directory itself (the basename) will be the
+        #               top-level element of the zip file.
+        # recreate::    If +true+, remove the zip file if it exists already,
+        #               so it's recreated from scratch. If +false+ (the 
+        #               default), don't recreate the zip file if it doesn't
+        #               exist; instead, update the existing file.
         #
         # Returns:
         #
@@ -157,35 +159,37 @@ module Grizzled
       # class mixes in methods that will allow you to unzip zip files.
       # Related modules and classes:
       #
-      # [Grizzled::FileUtil::Zipper]    A class that includes this module
+      # Grizzled::FileUtil::Zipper::    A class that includes this module
       #                                 and can be instantiated by itself.
-      # [Grizzled::FileUtil::ZipMixin]  A module mixin for zipping zip files.
-      # [Grizzled::FileUtil::Unzipper]  A class that includes `UnzipMixin'
+      # Grizzled::FileUtil::ZipMixin::  A module mixin for zipping zip files.
+      # Grizzled::FileUtil::Unzipper::  A class that includes `UnzipMixin'
       #                                 and can be instantiated by itself.
       module UnzipMixin
         # Unzips a zip file into a directory.
         #
         # Parameters:
         #
-        # [+zip_file+]  The zip file to unzip.
-        # [+directory+] The directory into which to unzip the file. The
-        #               directory is created if it doesn't already exist.
-        # [+options+]   Options hash, as described below.
-        # [+&select+]   If a block (+select+) is given, then +unzip+ passes each
-        #               zip file entry name to the block and only unzips the
-        #               entry if the block returns +true+. If no block is
-        #               given, then everything is unzipped (subject also to
-        #               the +:recursive+ option, below).
+        # zip_file::  The zip file to unzip.
+        # directory:: The directory into which to unzip the file. The
+        #             directory is created if it doesn't already exist.
+        # options::   Options hash, as described below.
+        # select::    If a block (+select+) is given, then +unzip+ passes each
+        #             zip file entry name to the block and only unzips the
+        #             entry if the block returns +true+. If no block is
+        #             given, then everything is unzipped (subject also to
+        #              the +:recursive+ option, below).
         #
         # Options:
         #
-        # [+:recursive+]  If +false+, only extract the top-level files from
-        #                 the zip file. If +true+ (the default),
-        #                 recursively extract everything.
-        # [+:overwrite+]  If +false+ (the default), do not overwrite existing
-        #                 files in the directory. If +true+, overwrite
-        #                 any existing files in the directory with extracted
-        #                 zip files whose names match.
+        # **NOTE**: Options are symbols (e.g., +:recursive+).
+        #
+        # recursive::  If +false+, only extract the top-level files from the
+        #              zip file. If +true+ (the default), recursively
+        #              extract everything.
+        # overwrite::  If +false+ (the default), do not overwrite existing
+        #              files in the directory. If +true+, overwrite
+        #              any existing files in the directory with extracted
+        #              zip files whose names match.
         #
         # Example:
         #
@@ -198,7 +202,6 @@ module Grizzled
         #      unzip zipfile_path, d
         #      # muck with unpacked contents
         #    end
-
         def unzip(zip_file, directory, options = {}, &select)
           overwrite = options.fetch(:overwrite, false)
           recurse = options.fetch(:recursive, true)
@@ -228,10 +231,10 @@ module Grizzled
         #
         # Parameters:
         #
-        # [+zip_file+]  The zip file to unzip.
-        # [+block+]     Block to execute on each entry. If omitted, an
-        #               Enumerator is returned. The block receives a string
-        #               representing the path of the item in the file.
+        # zip_file::  The zip file to unzip.
+        # block::     Block to execute on each entry. If omitted, an
+        #             Enumerator is returned. The block receives a string
+        #             representing the path of the item in the file.
         def zip_file_entries(zip_file, &block)
           if not block_given?
             a = []

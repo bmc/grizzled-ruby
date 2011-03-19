@@ -43,6 +43,11 @@ class Dir
   # walked top-down, not depth-first. To terminate the traversal, the block
   # should return +false+. Anything else (including +nil+) continues the
   # traversal.
+  #
+  # Parameters:
+  #
+  # dirname:: The name (path) of the directory to walk.
+  # block::   The block to invoke on each entry.
   def self.walk(dirname, &block)
     Grizzled::Directory.walk(dirname, &block)
   end
@@ -64,6 +69,11 @@ module Grizzled
     # directory is walked top-down, not depth-first. To terminate the
     # traversal, the block should return +false+. Anything else (including
     # +nil+) continues the traversal.
+    #
+    # Parameters:
+    #
+    # dirname:: The name (path) of the directory to walk.
+    # block::   The block to invoke on each entry.
     def self.walk(dirname, &block)
       if block.call(Dir.new(dirname)) != false
         Dir.entries(dirname).each do |entry|

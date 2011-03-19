@@ -53,8 +53,8 @@ module Grizzled
     #
     # Parameters:
     #
-    # [+pop_empty_nil+]  +true+ if popping an empty stack should just return
-    #                    +nil+, +false+ if it should thrown an exception.
+    # pop_empty_nil::  +true+ if popping an empty stack should just return
+    #                  +nil+, +false+ if it should thrown an exception.
     def initialize(pop_empty_nil=true)
       @the_stack = []
       @pop_empty_nil = pop_empty_nil
@@ -93,6 +93,10 @@ module Grizzled
     #
     #     stack = Stack.new
     #     [1, 2, 3].each {|i| stack.push i}
+    #
+    # Parameters:
+    #
+    # element:: The object to push onto the stack.
     def push(element)
       if element.class == Array
         element.each {|e| @the_stack.push e}

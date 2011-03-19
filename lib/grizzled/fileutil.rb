@@ -88,9 +88,9 @@ module Grizzled
     #
     # Parameters:
     #
-    # [+directory+] The starting directory, which is created if it does not
-    #               exist.
-    # [+tree+]      The entry tree, as described above
+    # directory:: The starting directory, which is created if it does not
+    #             exist.
+    # tree::      The entry tree, as described above
     #
     # Returns:
     #

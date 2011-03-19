@@ -123,17 +123,19 @@ module Grizzled
       #
       # Parameters:
       #
-      # [+source+]  A string, representing a file name or URL (http, https or
-      #             ftp), a +File+ object, or an object with an +each_line+
-      #             method that returns individual lines of input.
-      # [+options+] Various processing options. See below.
+      # source::  A string, representing a file name or URL (http, https or
+      #           ftp), a +File+ object, or an object with an +each_line+
+      #           method that returns individual lines of input.
+      # options:: Various processing options. See below.
       #
       # Options:
       #
-      # [+:max_nesting+]      Maximum include nesting level. Default: 100
-      # [+:include_pattern+]  String regex pattern to match include directives.
-      #                       Must have a single regex group for the file name
-      #                       or URL. Default: ^%include\s"([^"]+)"
+      # **NOTE**: Options are symbols (e.g., +:recursive+).
+      #
+      # max_nesting::      Maximum include nesting level. Default: 100
+      # include_pattern::  String regex pattern to match include directives.
+      #                    Must have a single regex group for the file name
+      #                    or URL. Default: ^%include\s"([^"]+)"
       def initialize(source, options={})
         @max_nesting = options.fetch(:max_nesting, 100)
         inc_pattern = options.fetch(:include_pattern, '^%include\s"([^"]+)"')

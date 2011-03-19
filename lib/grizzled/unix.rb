@@ -55,8 +55,10 @@ module Grizzled
 
       # Run a block of code as this user.
       #
-      # [+block+] the block to execute as that user. It will receive this
-      #           +User+ object as a parameter.
+      # Parameters:
+      #
+      # block:: the block to execute as that user. It will receive this
+      #         +User+ object as a parameter.
       #
       # This function will only run as 'root'.
       #

@@ -7,7 +7,7 @@ GEMSPEC = "#{PACKAGE}.gemspec"
 DOC_DIR = 'rdoc'
 GH_PAGES_DIR = File.join('..', 'gh-pages')
 DOC_PUBLISH_DIR = File.join(GH_PAGES_DIR, 'apidocs')
-RUBY_FILES = FileList['**/*.rb']
+RUBY_FILES = FileList['lib/**/*.rb']
 
 def load_gem(spec)
   eval File.open(spec).readlines.join('')
@@ -41,7 +41,9 @@ file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
 end  
 
 desc "Build the documentation, locally"
-task :doc => RUBY_FILES do |t|
+task :doc => :rdoc
+
+file 'rdoc' => RUBY_FILES do |t|
   require 'rdoc/rdoc'
   puts('Running rdoc...')
   r = RDoc::RDoc.new

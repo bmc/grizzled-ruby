@@ -70,6 +70,13 @@ module Grizzled
 
     # Forward all unimplemented method calls to +obj+, except those
     # whose symbols are listed in the +exceptions+ array.
+    #
+    # Parameters:
+    #
+    # obj::        The object to which to forward unimplemented method calls
+    # exception+:: A list of symbols for unimplemented methods that should
+    #              not be forwarded to +obj+. Note: You do _not_ have to put
+    #              methods you've implemented in here.
     def forward_to(obj, exceptions=[])
       @forward_obj = obj
 
