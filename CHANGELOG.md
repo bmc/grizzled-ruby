@@ -9,6 +9,6 @@ Version 0.1.1 (18 March, 2011)
 
 ---
 
-Version 0.1.0 (14 March, 2011)
+Version 0.1.0 (12 March, 2011)
 
 * Initial version published to the web and to RubyGems.

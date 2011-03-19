@@ -3,8 +3,8 @@
 Gem::Specification.new do |spec|
 
   spec.name             = 'grizzled-ruby'
-  spec.version          = '0.1.0'
-  spec.date             = '2011-03-12'
+  spec.version          = '0.1.1'
+  spec.date             = '2011-03-18'
 
   spec.summary          = 'Miscellaneous, general-purpose Ruby modules and ' +
                           'classes'

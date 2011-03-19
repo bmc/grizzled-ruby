@@ -5,7 +5,8 @@ require 'rake/clean'
 PACKAGE = 'grizzled-ruby'
 GEMSPEC = "#{PACKAGE}.gemspec"
 DOC_DIR = 'rdoc'
-DOC_PUBLISH_DIR = '../gh-pages/apidocs'
+GH_PAGES_DIR = File.join('..', 'gh-pages')
+DOC_PUBLISH_DIR = File.join(GH_PAGES_DIR, 'apidocs')
 RUBY_FILES = FileList['**/*.rb']
 
 def load_gem(spec)
@@ -64,6 +65,18 @@ task :pubdoc => :doc do |t|
   cd DOC_DIR do
     mkdir_p target
     cp_r '.', target
+  end
+
+  File.open(File.join(GH_PAGES_DIR, 'CHANGELOG.md'), 'w') do |f|
+    f.write <<EOF
+---
+title: Change Log for Grizzled Ruby
+layout: default
+---
+
+EOF
+    f.write File.open('CHANGELOG.md').read
+    f.close
   end
 end
 
