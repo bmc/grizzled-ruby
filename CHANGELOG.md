@@ -1,5 +1,11 @@
 # Change Log for Grizzled Ruby
 
+Version 0.1.2 (*in progress*)
+
+* Cleaned up API documentation.
+
+---
+
 Version 0.1.1 (18 March, 2011)
 
 * Added `Grizzled::FileUtil::ZipUtil` module, which contains some
