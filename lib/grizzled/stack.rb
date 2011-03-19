@@ -1,8 +1,7 @@
 # Provides a simple stack implementation. See the Grizzled::Stack class
 # for complete details.
 #
-# ---
-#
+#--
 # This software is released under a BSD license, adapted from
 # http://opensource.org/licenses/bsd-license.php
 #
@@ -35,13 +34,8 @@
 # LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# ---------------------------------------------------------------------------
+#++
 
-# Grizzled Ruby: A library of miscellaneous, general-purpose Ruby modules.
-#
-# Author:: Brian M. Clapper (mailto:bmc@clapper.org)
-# Copyright:: Copyright (c) 2011 Brian M. Clapper
-# License:: BSD License
 module Grizzled
 
   # Thrown for un-safe stacks if the stack

@@ -1,3 +1,6 @@
+# Miscellaneous additional directory-related modules and classes.
+#
+#--
 # This software is released under a BSD license, adapted from
 # http://opensource.org/licenses/bsd-license.php
 #
@@ -30,13 +33,8 @@
 # LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# ---------------------------------------------------------------------------
+#++
 
-# Grizzled Ruby: A library of miscellaneous, general-purpose Ruby modules.
-#
-# Author:: Brian M. Clapper (mailto:bmc@clapper.org)
-# Copyright:: Copyright (c) 2011 Brian M. Clapper
-# License:: BSD License
 class Dir
 
   # Adds a +walk+ method to the standard Ruby +Dir+ class. +walk+ walks a
@@ -61,7 +59,7 @@ module Grizzled
   # Useful directory-related methods.
   class Directory
 
-    # Walk a directory tree, starting at _dirname_, invoking the supplied
+    # Walk a directory tree, starting at +dirname+, invoking the supplied
     # block on each directory. The block is passed a +Dir+ object. The
     # directory is walked top-down, not depth-first. To terminate the
     # traversal, the block should return +false+. Anything else (including

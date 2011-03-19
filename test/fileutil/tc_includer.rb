@@ -6,16 +6,14 @@ require 'grizzled/fileutil/includer'
 include Grizzled::FileUtil
 
 class IncluderTestDriver < Test::Unit::TestCase
+  include GrizzledTestHelper
 
   def test_successful_file_include
-    test_file = make_include_file
-    begin
+    make_include_file do |test_file|
       inc = Includer.new(test_file.main_file)
       lines = inc.readlines.map {|line| line.chomp}
       assert_equal(['one-1', 'one-2', 'two-2', 'two-1'], lines)
       inc.close
-    ensure
-      test_file.unlink
     end
   end
 
@@ -33,32 +31,25 @@ EOF
   end
 
   def test_uri_include
-    test_file = make_include_file
-    begin
+    make_include_file do |test_file|
       inc = Includer.new(test_file.main_file)
       lines = inc.readlines.map {|line| line.chomp}
       assert_equal(['one-1', 'one-2', 'two-2', 'two-1'], lines)
       inc.close
-    ensure
-      test_file.unlink
     end
   end
 
   def test_path
-    test_file = make_include_file
-    begin
+    make_include_file do |test_file|
       path = test_file.main_file
       inc = Includer.new(test_file.main_file)
       assert_equal(test_file.main_file, inc.path)
       inc.close
-    ensure
-      test_file.unlink
     end
   end
 
   def test_each_byte
-    test_file = make_include_file
-    begin
+    make_include_file do |test_file|
       inc = Includer.new(test_file.main_file)
       contents = inc.read.split(//)
       inc.close
@@ -71,8 +62,6 @@ EOF
       inc.close
 
       assert_equal(contents, bytes)
-    ensure
-      test_file.unlink
     end
   end
     
@@ -94,7 +83,16 @@ two-1
 EOF1
     temp1.close
     temp2.close
-    TestIncludeFile.new([temp1, temp2].map {|t| t.path})
+    t = TestIncludeFile.new([temp1, temp2].map {|t| t.path})
+    if block_given?
+      begin
+        yield t
+      ensure
+        t.unlink
+      end
+    else
+      t
+    end
   end
 end
 
