@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>unzip (Grizzled::FileUtil::ZipUtil::UnzipMixin)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/fileutil/ziputil.rb, line 202</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unzip</span>(<span class="ruby-identifier">zip_file</span>, <span class="ruby-identifier">directory</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">select</span>)
+          <span class="ruby-identifier">overwrite</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:overwrite</span>, <span class="ruby-keyword kw">false</span>)
+          <span class="ruby-identifier">recurse</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">:recursive</span>, <span class="ruby-keyword kw">true</span>)
+
+          <span class="ruby-identifier">zip</span> = <span class="ruby-constant">Zip</span><span class="ruby-operator">::</span><span class="ruby-constant">ZipFile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">zip_file</span>)
+          <span class="ruby-constant">Zip</span><span class="ruby-operator">::</span><span class="ruby-constant">ZipFile</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">zip_file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">file_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">directory</span>, <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_s</span>)
+            <span class="ruby-identifier">parent_dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span> <span class="ruby-identifier">file_path</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">recurse</span> <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">parent_dir</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'.'</span>) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">parent_dir</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>)
+              <span class="ruby-comment cmt"># If the caller supplied a block, only extract the file if</span>
+              <span class="ruby-comment cmt"># the block says we can.</span>
+              <span class="ruby-identifier">extract</span> = <span class="ruby-identifier">block_given?</span> <span class="ruby-value">? </span><span class="ruby-identifier">select</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">true</span>
+              <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">extract</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parent_dir</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">''</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span> <span class="ruby-identifier">parent_dir</span>
+                    <span class="ruby-constant">FileUtils</span><span class="ruby-operator">::</span><span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">parent_dir</span>
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+            <span class="ruby-identifier">zip</span>.<span class="ruby-identifier">extract</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-identifier">file_path</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

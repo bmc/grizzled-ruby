@@ -48,6 +48,8 @@ clone the [git repository][] or [download the source][] and unpack it. Then:
 
 The [RDoc][]-generated API documents are [here](apidocs/).
 
+The [change log][CHANGELOG] is [here][CHANGELOG].
+
 ## Author
 
 Brian M. Clapper, [bmc@clapper.org][]
@@ -81,3 +83,4 @@ request. Along with any patch you send:
 [published gem]: https://rubygems.org/gems/grizzled-ruby
 [rvm]: http://rvm.beginrescueend.com/
 [download the source]: https://github.com/bmc/grizzled-ruby/archives/master
+[CHANGELOG]: CHANGELOG.html

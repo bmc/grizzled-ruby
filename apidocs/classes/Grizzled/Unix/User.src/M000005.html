@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/unix.rb, line 53</span>
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/unix.rb, line 51</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">id</span>)
         <span class="ruby-comment cmt"># Find the user in the password database.</span>
         <span class="ruby-ivar">@pwent</span> = (<span class="ruby-identifier">id</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Integer</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwuid</span>(<span class="ruby-identifier">id</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwnam</span>(<span class="ruby-identifier">id</span>)

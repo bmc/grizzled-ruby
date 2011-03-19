@@ -5,14 +5,16 @@
 
 <html>
 <head>
-  <title>eql? (Grizzled::Stack)</title>
+  <title>each (Grizzled::Stack)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/grizzled/stack.rb, line 146</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">other</span>)
-      (<span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Stack</span>) <span class="ruby-keyword kw">and</span> (<span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">to_a</span>)
+  <pre><span class="ruby-comment cmt"># File lib/grizzled/stack.rb, line 112</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">element</span>
+      <span class="ruby-keyword kw">end</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

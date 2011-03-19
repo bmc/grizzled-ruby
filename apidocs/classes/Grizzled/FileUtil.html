@@ -55,8 +55,16 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
+                <a href="../../files/lib/grizzled/fileutil_rb.html">
+                lib/grizzled/fileutil.rb
+                </a>
+        <br />
                 <a href="../../files/lib/grizzled/fileutil/includer_rb.html">
                 lib/grizzled/fileutil/includer.rb
+                </a>
+        <br />
+                <a href="../../files/lib/grizzled/fileutil/ziputil_rb.html">
+                lib/grizzled/fileutil/ziputil.rb
                 </a>
         <br />
             </td>
@@ -72,10 +80,24 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+This module and its submodules contain various file-related utility
+methods.
+</p>
+
+    </div>
 
 
    </div>
 
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000027">make_directory_tree</a>&nbsp;&nbsp;
+      </div>
+    </div>
 
   </div>
 
@@ -87,7 +109,10 @@
     <div id="class-list">
       <h3 class="section-bar">Classes and Modules</h3>
 
-      Class <a href="FileUtil/IncludeException.html" class="link">Grizzled::FileUtil::IncludeException</a><br />
+      Module <a href="FileUtil/ZipUtil.html" class="link">Grizzled::FileUtil::ZipUtil</a><br />
+Class <a href="FileUtil/BadDirectoryTreeKey.html" class="link">Grizzled::FileUtil::BadDirectoryTreeKey</a><br />
+Class <a href="FileUtil/BadDirectoryTreeValue.html" class="link">Grizzled::FileUtil::BadDirectoryTreeValue</a><br />
+Class <a href="FileUtil/IncludeException.html" class="link">Grizzled::FileUtil::IncludeException</a><br />
 Class <a href="FileUtil/IncludeSource.html" class="link">Grizzled::FileUtil::IncludeSource</a><br />
 Class <a href="FileUtil/Includer.html" class="link">Grizzled::FileUtil::Includer</a><br />
 
@@ -100,6 +125,92 @@ Class <a href="FileUtil/Includer.html" class="link">Grizzled::FileUtil::Includer
 
 
     <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="FileUtil.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('FileUtil.src/M000027.html');return false;">
+          <span class="method-name">make_directory_tree</span><span class="method-args">(directory, tree)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a file/directory hierarchy. The hash table specifies the entries,
+using the following rules.
+</p>
+<ul>
+<li>A hash entry whose value is another hash table is taken to be a directory
+and will be recursively created.
+
+</li>
+<li>A hash entry with a <a href="String.html">String</a> value is a file, whose
+contents are the string.
+
+</li>
+<li>A hash entry with an Enumerable value is a file, whose contents are the
+enumerable values, rendered as strings.
+
+</li>
+<li>Anything else is an error.
+
+</li>
+</ul>
+<p>
+For instance, this hash:
+</p>
+<pre>
+   tree = {&quot;foo&quot; =&gt;
+             {&quot;bar&quot;   =&gt; {&quot;a&quot; =&gt; &quot;File a's contents&quot;,
+                          &quot;b&quot; =&gt; &quot;File b's contents&quot;},
+              &quot;baz&quot;   =&gt; {&quot;c&quot; =&gt; &quot;Blah blah blah&quot;},
+              &quot;xyzzy&quot; =&gt; &quot;Yadda yadda yadda&quot;}}
+</pre>
+<p>
+results in this directory tree:
+</p>
+<pre>
+    foo/
+        bar/
+            a   # File a's contents
+            b   # File a's contents
+
+        baz/
+            c   # Blah blah blah
+
+        xyzzy   # Yadda yadda yadda
+</pre>
+<p>
+The keys should be simple file names, with no file separators (i.e., no
+parent directories).
+</p>
+<p>
+Parameters:
+</p>
+<dl>
+<dt><tt>directory</tt></dt><dd>The starting directory, which is created if it does not exist.
+
+</dd>
+<dt><tt>tree</tt></dt><dd>The entry tree, as described above
+
+</dd>
+</dl>
+<p>
+Returns:
+</p>
+<p>
+A <tt><a href="../Dir.html">Dir</a></tt> object for <tt>directory</tt>, for
+convenience.
+</p>
+        </div>
+      </div>
+
+
+    </div>
 
 
   </div>
