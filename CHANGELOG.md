@@ -1,6 +1,6 @@
 # Change Log for Grizzled Ruby
 
-Version 0.1.2 (*in progress*)
+Version 0.1.2 (24 March, 2011)
 
 * Cleaned up API documentation.
 * Added *grinc* command/executable.
