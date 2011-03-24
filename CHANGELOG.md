@@ -3,6 +3,7 @@
 Version 0.1.2 (*in progress*)
 
 * Cleaned up API documentation.
+* Added *grinc* command/executable.
 
 ---
 
