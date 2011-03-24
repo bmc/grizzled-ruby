@@ -26,7 +26,7 @@ def gem_name(spec)
 end
 
 GEM = gem_name(GEMSPEC)
-CLEAN << [GEM, DOC_OUT_DIR]
+CLEAN << [DOC_OUT_DIR, GEM]
 
 # ---------------------------------------------------------------------------
 # Tasks
@@ -52,7 +52,7 @@ task :doc => [:rdoc, :man]
 
 task :man => MAN_PAGES do |t|
   puts('Running ronn on manual pages...')
-  mkdir_p MAN_OUT_DIR
+  mkdir_p MAN_OUT_DIR unless File.exists? MAN_OUT_DIR
   MAN_PAGES.each do |m|
     base = File.join(MAN_OUT_DIR, File.basename(m, '.md'))
     sh "ronn --html --pipe #{m} >#{base + '.1.html'}"
@@ -63,8 +63,8 @@ end
 file 'rdoc' => RUBY_FILES do |t|
   require 'rdoc/rdoc'
   puts('Running rdoc...')
+  mkdir_p File.dirname(RDOC_OUT_DIR) unless File.exists? RDOC_OUT_DIR
   r = RDoc::RDoc.new
-  mkdir_p RDOC_OUT_DIR
   r.document(['-U', '-m', 'lib/grizzled.rb', '-o', RDOC_OUT_DIR, 'lib'])
 end
 
