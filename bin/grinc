@@ -47,6 +47,7 @@ include Grizzled::FileUtil
 # ---------------------------------------------------------------------------
 
 DEFAULT_MAX_NEST = 100
+PROGRAM_NAME = 'grinc'
 
 # ---------------------------------------------------------------------------
 # Classes
@@ -76,7 +77,7 @@ def parse_params
   options_hash = {}
   error = nil
   option_parser = OptionParser.new do |opts|
-    opts.program_name = 'grinc'
+    opts.program_name = PROGRAM_NAME
     opts.banner = "Usage: #{opts.program_name} [OPTIONS] inputfile ..."
     opts.separator ''
     opts.separator 'OPTIONS:'
@@ -94,7 +95,12 @@ def parse_params
     end
   end
 
-  option_parser.parse!(ARGV)
+  begin
+    option_parser.parse!(ARGV)
+  rescue OptionParser::InvalidOption => ex
+    error = ex.to_s
+  end
+
   if error
     $stderr.puts(error) unless error.nil?
     option_parser.display
@@ -122,7 +128,6 @@ end
 
 begin
   params = parse_params
-  puts params
   out = params.output.nil? ? $stderr : File.open(params.output, 'w')
 
   if params.input_paths.nil?
@@ -135,6 +140,11 @@ begin
 
 rescue UsageError
   exit 1
+
+rescue
+  $stderr.puts("#{PROGRAM_NAME}: #{$!}")
+  exit 1
+
 else
   exit 0
 end
