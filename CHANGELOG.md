@@ -5,6 +5,13 @@ layout: default
 
 # Change Log for Grizzled Ruby
 
+Version 0.1.3 (24 March, 2011)
+
+* Correct minor problems in *grinc* that shouldn't have been pushed, but
+  were.
+
+---
+
 Version 0.1.2 (24 March, 2011)
 
 * Cleaned up API documentation.
