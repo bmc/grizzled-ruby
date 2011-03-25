@@ -7,14 +7,11 @@ require 'pathname'
 
 PACKAGE = 'grizzled-ruby'
 GEMSPEC = "#{PACKAGE}.gemspec"
-DOC_OUT_DIR = 'docs'
-RDOC_OUT_DIR = File.join(DOC_OUT_DIR, 'rdoc')
-MAN_OUT_DIR = File.join(DOC_OUT_DIR, 'man')
+RDOC_OUT_DIR = 'rdoc'
 GH_PAGES_DIR = File.join('..', 'gh-pages')
 RDOC_PUBLISH_DIR = File.join(GH_PAGES_DIR, 'apidocs')
-MAN_PUBLISH_DIR = File.join(GH_PAGES_DIR, 'man')
-RUBY_FILES = FileList['lib/**/*.rb']
-MAN_PAGES = FileList['man/*.md']
+RUBY_SRC_DIR = 'lib'
+RUBY_FILES = FileList[File.join(RUBY_SRC_DIR, '**', '*.rb')]
 
 def load_gem(spec)
   eval File.open(spec).readlines.join('')
@@ -26,7 +23,11 @@ def gem_name(spec)
 end
 
 GEM = gem_name(GEMSPEC)
-CLEAN << [DOC_OUT_DIR, GEM]
+CLEAN << [RDOC_OUT_DIR, GEM]
+
+# ---------------------------------------------------------------------------
+# Rules
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # Tasks
@@ -44,33 +45,31 @@ desc "Build the gem (#{GEM})"
 task :gem => GEM
 
 file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
-  sh "gem build #{GEMSPEC}"
+  require 'rubygems/builder'
+  if !defined? Gem
+    raise StandardError.new("Gem package not defined.")
+  end
+  spec = eval File.new(GEMSPEC).read
+  Gem::Builder.new(spec).build
 end  
 
 desc "Build the documentation, locally"
-task :doc => [:rdoc, :man]
-
-task :man => MAN_PAGES do |t|
-  puts('Running ronn on manual pages...')
-  mkdir_p MAN_OUT_DIR unless File.exists? MAN_OUT_DIR
-  MAN_PAGES.each do |m|
-    base = File.join(MAN_OUT_DIR, File.basename(m, '.md'))
-    sh "ronn --html --pipe #{m} >#{base + '.1.html'}"
-    sh "ronn --roff --pipe #{m} >#{base + '.1'}"
-  end
-end  
+task :doc => :rdoc
 
 file 'rdoc' => RUBY_FILES do |t|
   require 'rdoc/rdoc'
   puts('Running rdoc...')
   mkdir_p File.dirname(RDOC_OUT_DIR) unless File.exists? RDOC_OUT_DIR
   r = RDoc::RDoc.new
-  r.document(['-U', '-m', 'lib/grizzled.rb', '-o', RDOC_OUT_DIR, 'lib'])
+  r.document(['-U', '-m', "#{RUBY_SRC_DIR}/grizzled.rb", '-o', RDOC_OUT_DIR,
+              RUBY_SRC_DIR])
 end
 
 desc "Install the gem"
 task :install => :gem do |t|
-  sh "gem install #{GEM}"
+  require 'rubygems/installer'
+  puts("Installing from #{GEM}")
+  Gem::Installer.new(GEM).install
 end
 
 desc "Publish the gem"
@@ -79,24 +78,13 @@ task :publish => :gem do |t|
 end
 
 desc "Publish the docs. Not really of use to anyone but the author"
-task :pubdoc => [:pubrdoc, :pubman, :pubchangelog]
+task :pubdoc => [:pubrdoc, :pubchangelog]
 
 task :pubrdoc => :doc do |t|
   target = Pathname.new(RDOC_PUBLISH_DIR).expand_path.to_s
   cd RDOC_OUT_DIR do
     mkdir_p target
     cp_r '.', target
-  end
-end
-
-desc "Publish the man pages. Not really of use to anyone but the author"
-task :pubman => :man do |t|
-  target = Pathname.new(MAN_PUBLISH_DIR).expand_path.to_s
-  cd MAN_OUT_DIR do
-    mkdir_p target
-    Dir['*.html'].each do |m|
-      cp m, target
-    end
   end
 end
 

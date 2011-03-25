@@ -1,27 +1,32 @@
 #                                                                -*- ruby -*-
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |s|
 
-  spec.name             = 'grizzled-ruby'
-  spec.version          = '0.1.3'
-  spec.date             = '2011-03-24'
+  s.name             = 'grizzled-ruby'
+  s.version          = '0.1.4'
+  s.date             = '2011-03-25'
+  s.summary          = 'Some general-purpose Ruby modules, classes, and tools'
+  s.authors          = ['Brian M. Clapper']
+  s.license          = 'BSD'
+  s.email            = 'bmc@clapper.org'
+  s.homepage         = 'http://software.clapper.org/grizzled-ruby'
+  s.has_rdoc         = true
 
-  spec.summary          = 'Miscellaneous, general-purpose Ruby modules and ' +
-                          'classes'
-  spec.description      = <<-ENDDESC
-Grizzled Ruby is a general purpose library of Ruby modules and classes.
+  s.description      = <<-ENDDESC
+Grizzled Ruby is a general purpose library of Ruby modules, classes and tools.
 ENDDESC
 
-  spec.authors          = ['Brian M. Clapper']
-  spec.license          = 'BSD'
-  spec.email            = 'bmc@clapper.org'
-  spec.homepage         = 'http://software.clapper.org/grizzled-ruby'
-  spec.has_rdoc         = true
+  s.require_paths    = ['lib']
 
-  spec.require_paths    = ['lib']
-  spec.files            = Dir['lib/**/*.rb']
-  spec.executables      = ['grinc']
-  spec.test_files       = Dir['test/**/tc_*.rb']
+  # = MANIFEST =
+  s.files            = Dir.glob('[A-Z]*')
+  s.files           += Dir.glob('*.gemspec')
+  s.files           += Dir.glob('lib/**/*')
+  s.files           += Dir.glob('rdoc/**/*')
+
+
+  # = MANIFEST =
+  s.test_files       = FileList['test/**/tc_*.rb'].to_a
 end
 
 
