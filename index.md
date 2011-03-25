@@ -35,14 +35,6 @@ by the Grizzled Ruby package or packages you need. For example:
 
 The [RDoc][]-generated API documents are [here](apidocs/).
 
-# The Executables
-
-## grinc
-
-*grinc* is a front-end command line tool that runs the
-Grizzled::FileUtil::Includer library against one or more input files.
-See the [*grinc* manual page](man/grinc.1.html) for details.
-
 # Installation
 
 ## From RubyGems.org
