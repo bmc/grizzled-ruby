@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.license          = 'BSD'
   s.email            = 'bmc@clapper.org'
   s.homepage         = 'http://software.clapper.org/grizzled-ruby'
-  s.has_rdoc         = true
 
   s.description      = <<-ENDDESC
 Grizzled Ruby is a general purpose library of Ruby modules, classes and tools.
