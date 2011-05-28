@@ -59,7 +59,7 @@ Brian M. Clapper, [bmc@clapper.org][]
 
 # Copyright and License
 
-The Grizzled Scala Library is copyright &copy; 2009-2010 Brian M. Clapper
+The Grizzled Ruby Library is copyright &copy; 2011 Brian M. Clapper
 and is released under a [BSD License][].
 
 # Change Log
@@ -73,7 +73,7 @@ patches to me or to fork the [git repository][] and send me a pull
 request. Along with any patch you send:
 
 * Please state that the patch is your original work.
-* Please indicate that you license the work to the PROJECT project
+* Please indicate that you license the work to the Grizzled Ruby project
   under a [BSD License][].
 
 [Grizzled Python]: http://software.clapper.org/grizzled-python/
