@@ -1,5 +1,9 @@
 # Change Log for Grizzled Ruby
 
+Version 0.1.5 (...)
+
+- Added `WrapMany` class.
+
 Version 0.1.4 (25 March, 2011)
 
 - Fixed some gem issues.
