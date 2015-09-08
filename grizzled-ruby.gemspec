@@ -3,8 +3,8 @@
 Gem::Specification.new do |s|
 
   s.name             = 'grizzled-ruby'
-  s.version          = '0.1.5'
-  s.date             = '2011-09-07'
+  s.version          = '0.1.6'
+  s.date             = '2015-09-08'
   s.summary          = 'Some general-purpose Ruby modules, classes, and tools'
   s.authors          = ['Brian M. Clapper']
   s.license          = 'BSD'
@@ -17,6 +17,8 @@ ENDDESC
 
   s.require_paths    = ['lib']
 
+  s.add_runtime_dependency 'zip', '~> 2.0', '>= 2.0.2'
+
   # = MANIFEST =
   s.files            = Dir.glob('[A-Z]*')
   s.files           += Dir.glob('*.gemspec')
@@ -25,7 +27,7 @@ ENDDESC
 
 
   # = MANIFEST =
-  s.test_files       = FileList['test/**/tc_*.rb'].to_a
+  s.test_files       = Dir.glob('test/**/tc_*.rb')
 end
 
 

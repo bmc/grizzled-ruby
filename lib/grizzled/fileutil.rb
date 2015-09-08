@@ -122,10 +122,14 @@ module Grizzled
             make_directory_tree(entry, contents)
 
           elsif contents.kind_of? Enumerable
-            f = File.open(File.join(entry), 'w')
-            contents.each {|thing| f.write(thing.to_s)}
-            f.close
+            File.open(File.join(entry), 'w') do |f|
+              contents.each {|thing| f.write(thing.to_s)}
+            end
 
+          elsif contents.kind_of? String
+            File.open(entry, "w") do |f|
+              f.write(contents)
+            end
           else
             raise BadDirectoryTreeValue.new(entry, contents)
           end

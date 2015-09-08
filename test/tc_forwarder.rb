@@ -1,4 +1,4 @@
-require 'test_helper'
+require './test_helper'
 require 'test/unit'
 require 'tempfile'
 require 'grizzled/forwarder'

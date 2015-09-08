@@ -61,6 +61,24 @@ module Grizzled
       end
     end
 
+    # Internal wrapper for multiple files
+    class FileIterator
+      def initialize(paths)
+        @files = paths
+      end
+
+      def each_line(&block)
+        @files.each do |path|
+          File.open path do |f|
+            f.each_line do |line|
+              block.call(line)
+            end
+          end
+        end
+        nil
+      end
+    end
+
     # == Introduction
     #
     # An +Includer+ object preprocesses a text file, resolve _include_
@@ -136,10 +154,13 @@ module Grizzled
       # include_pattern::  String regex pattern to match include directives.
       #                    Must have a single regex group for the file name
       #                    or URL. Default: ^%include\s"([^"]+)"
+      # allow_glob::       For file names, allow and expand glob expressions.
+      #                    Doesn't apply to URLs.
       def initialize(source, options={})
         @max_nesting = options.fetch(:max_nesting, 100)
         inc_pattern = options.fetch(:include_pattern, '^%include\s"([^"]+)"')
         @include_re = /#{inc_pattern}/
+        @allow_glob = options.fetch(:allow_glob, false)
         includer_source = source_to_includer_source source
         @source_uri = includer_source.uri
         @temp = preprocess includer_source
@@ -213,7 +234,7 @@ module Grizzled
           if not pathname.absolute?
             # Not an absolute path, and the including source has a path
             # (i.e., wasn't a string). Make this one relative to the path.
-            uri = cur_uri.clone            
+            uri = cur_uri.clone
             uri.path = File.join(::File.dirname(cur_uri.path), source)
           end
         end
@@ -224,7 +245,7 @@ module Grizzled
       # Open an input source, based on a parsed URI.
       def open_source(uri)
         case uri.scheme
-          when nil then     f = open(uri.path)  # assume file/path
+          when nil then     f = open_path(uri.path)  # assume file/path
           when 'file' then  f = open(uri.path)  # open path directly
           when 'http' then  f = open(uri.to_s)  # open-uri will handle it
           when 'https' then f = open(uri.to_s)  # open-uri will handle it
@@ -234,6 +255,14 @@ module Grizzled
         end
 
         IncludeSource.new(f, uri)
+      end
+
+      def open_path(path)
+        if @allow_glob
+          FileIterator.new(Dir.glob(path))
+        else
+          File.open(path)
+        end
       end
     end # class Includer
 

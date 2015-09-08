@@ -1,9 +1,10 @@
-#                                                                  -*- ruby -*-
+#
 #
 # NOTE: Man pages use the 'ronn' gem. http://rtomayko.github.com/ronn/
 
 require 'rake/clean'
 require 'pathname'
+require 'fileutils'
 
 PACKAGE = 'grizzled-ruby'
 GEMSPEC = "#{PACKAGE}.gemspec"
@@ -19,7 +20,8 @@ end
 
 def gem_name(spec)
   gem = load_gem(spec)
-  "#{PACKAGE}-#{gem.version.to_s}.gem"
+  version = gem.version.to_s
+  "#{PACKAGE}-#{version}.gem"
 end
 
 GEM = gem_name(GEMSPEC)
@@ -45,13 +47,8 @@ desc "Build the gem (#{GEM})"
 task :gem => GEM
 
 file GEM => RUBY_FILES + ['Rakefile', GEMSPEC] do |t|
-  require 'rubygems/builder'
-  if !defined? Gem
-    raise StandardError.new("Gem package not defined.")
-  end
-  spec = eval File.new(GEMSPEC).read
-  Gem::Builder.new(spec).build
-end  
+  sh "gem build #{GEMSPEC}"
+end
 
 desc "Build the documentation, locally"
 task :doc => :rdoc
@@ -66,10 +63,9 @@ file 'rdoc' => RUBY_FILES do |t|
 end
 
 desc "Install the gem"
-task :install => :gem do |t|
-  require 'rubygems/installer'
+task :install => [:build, :gem] do |t|
   puts("Installing from #{GEM}")
-  Gem::Installer.new(GEM).install
+  sh "gem install #{GEM}"
 end
 
 desc "Publish the gem"

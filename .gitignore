@@ -1,2 +1,4 @@
 *.gem
 rdoc
+*.iml
+.idea

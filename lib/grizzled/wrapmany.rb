@@ -1,3 +1,5 @@
+require 'ostruct'
+
 # Adapted from https://gist.github.com/1120383
 #
 # Wraps multiple objects in a single object. Method calls are resolved by
@@ -14,7 +16,7 @@
 #
 #     require 'ostruct'
 #     require 'grizzled/wrapmany'
-# 
+#
 #     age_holder = OpenStruct.new(:age => 43)
 #     u = User.find(...)
 #     user_with_age = WrapMany.new(u, age_holder)
@@ -22,7 +24,7 @@
 # Example 2: Add an "age" value to a User object using a hash
 #
 #     require 'grizzled/wrapmany'
-# 
+#
 #     u = User.find(...)
 #     user_with_age = WrapMany.new(u, {:age => 43})
 #
@@ -35,7 +37,7 @@
 #             @age = age
 #         end
 #     end
-# 
+#
 #     u = User.find(...)
 #     user_with_age = WrapMany.new(u, AgeHolder.new(43))
 class WrapMany
@@ -56,7 +58,7 @@ class WrapMany
 
       # First determine if the method exists as a public instance method.
       # If so, call it.
-      if o.class.public_instance_methods.include? method_name
+      if o.class.public_instance_methods.include? method_name.to_sym
         return o.send(method_name, *args, &block)
       end
 

@@ -65,7 +65,7 @@ class ZipMixinTestDriver < Test::Unit::TestCase
   end
 
   def test_non_recursive
-    expected_files = ['foo.txt', 'bar.txt']
+    expected_files = ['foo.txt', 'bar.txt'].sort
     Dir.mktmpdir 'ziptest' do |tmpdir|
       FileUtils.cd tmpdir do
 
@@ -85,7 +85,7 @@ class ZipMixinTestDriver < Test::Unit::TestCase
       with_tempfile('ziptest', '.zip') do |t|
         zip t.path, tmpdir, :dir_at_top => false, :recursive => false
 
-        assert_equal expected_files, zip_file_entries(t.path).to_a
+        assert_equal expected_files, zip_file_entries(t.path).to_a.sort
       end
     end
   end
