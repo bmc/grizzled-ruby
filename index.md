@@ -90,4 +90,4 @@ request. Along with any patch you send:
 [published gem]: https://rubygems.org/gems/grizzled-ruby
 [rvm]: http://rvm.beginrescueend.com/
 [download the source]: https://github.com/bmc/grizzled-ruby/archives/master
-[CHANGELOG]: CHANGELOG.html
+[CHANGELOG]: https://github.com/bmc/grizzled-ruby/blob/master/CHANGELOG.md
