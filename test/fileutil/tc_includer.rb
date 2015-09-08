@@ -64,7 +64,38 @@ EOF
       assert_equal(contents, bytes)
     end
   end
-    
+
+  def test_glob
+    temps = ["/tmp/foo.txt", "/tmp/foo1.txt", "/tmp/foo2.txt"]
+    main = File.open(temps[0], "w")
+    temp1 = File.open(temps[1], "w")
+    temp2 = File.open(temps[2], "w")
+    begin
+
+      temp1.write <<EOF1
+one-1
+two-1
+EOF1
+
+      temp2.write <<EOF2
+one-2
+two-2
+EOF2
+      temp1.close
+      temp2.close
+      File.open(main, "w") do |f|
+        f.write('%include "./foo[0-9]*.txt"\n')
+      end
+
+      inc = Includer.new(main, allow_glob: true)
+      contents = inc.read
+      assert_equal("one-1\ntwo-1\none-2\ntwo-2\n", contents)
+    ensure
+      [main, temp1, temp2].each { |f| f.close unless f.closed? }
+      temps.each { |path| File.delete(path) }
+    end
+  end
+
   private
 
   def make_include_file

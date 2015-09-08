@@ -79,6 +79,24 @@ module Grizzled
       end
     end
 
+    # Internal fake URI
+    class FakeURI
+      attr_accessor :path
+      def initialize(path)
+        @fake_methods = [:scheme, :userinfo, :host, :port, :registry, :opaque,
+                         :query, :fragment]
+        @path = path
+      end
+
+      def method_missing(meth, *args, &block)
+        if @fake_methods.include? meth
+          nil
+        else
+          raise NoMethodError.new("Undefined method: #{meth.to_s}")
+        end
+      end
+    end
+
     # == Introduction
     #
     # An +Includer+ object preprocesses a text file, resolve _include_
@@ -227,15 +245,22 @@ module Grizzled
       # Handle an include reference.
       def process_include(source, parent_input)
         cur_uri = parent_input.uri
-        uri = URI::parse(source)
+        begin
+          uri = URI::parse(source)
+        rescue URI::InvalidURIError
+          uri = FakeURI.new(source)
+        end
         if (cur_uri != nil) and (uri.scheme == nil)
           # Could be a relative path. Should be relative to the parent input.
           pathname = Pathname.new(source)
           if not pathname.absolute?
             # Not an absolute path, and the including source has a path
             # (i.e., wasn't a string). Make this one relative to the path.
-            uri = cur_uri.clone
-            uri.path = File.join(::File.dirname(cur_uri.path), source)
+            parent_path = cur_uri.path
+            abs = File.absolute_path(
+              File.join(::File.dirname(cur_uri.path), source)
+            )
+            uri = FakeURI.new(abs)
           end
         end
 
