@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Grizzled::String::Template::UnixShellStringTemplate - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="TemplateBase.html">Grizzled::String::Template::TemplateBase</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-find_variable_ref">#find_variable_ref</a>
+    
+    <li ><a href="#method-i-handle_long_match">#handle_long_match</a>
+    
+    <li ><a href="#method-i-handle_match">#handle_match</a>
+    
+    <li ><a href="#method-i-handle_no_long_match">#handle_no_long_match</a>
+    
+    <li ><a href="#method-i-pre_sub">#pre_sub</a>
+    
+    <li class="calls-super" ><a href="#method-i-substitute">#substitute</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Grizzled::String::Template::UnixShellStringTemplate">
+  <h1 id="class-Grizzled::String::Template::UnixShellStringTemplate" class="class">
+    class Grizzled::String::Template::UnixShellStringTemplate
+  </h1>
+
+  <section class="description">
+    
+<p>A string template that uses the <a href="../../Unix.html">Unix</a>
+shell-like syntax +${varname}+ (or +$varname+) for variable references. A
+variable&#39;s name typically consists of alphanumerics and underscores,
+but is controlled by the a supplied regular expression. To include a
+literal “$” in a string, escape it with a backslash.</p>
+
+<p>For this class, the general form of a variable reference is:</p>
+
+<pre>${varname?default}</pre>
+
+<p>The +?default+ suffix is optional and specifies a default value to be used
+if the variable has no value.</p>
+
+<p>A shorthand form of a variable reference is:</p>
+
+<pre class="ruby"><span class="ruby-identifier">$varname</span>
+</pre>
+
+<p>The <em>default</em> capability is not available in the shorthand form.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="ESCAPED_DOLLAR">ESCAPED_DOLLAR
+        
+        <dd>
+        
+      
+        <dt id="ESCAPED_DOLLAR_PLACEHOLDER">ESCAPED_DOLLAR_PLACEHOLDER
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(resolver, options={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initialize a new <code>UnixShellStringTemplate</code>. Supports various
+hash options.</p>
+
+<p>Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>resolver</code>
+<dd>
+<p>A hash-like object that can take a variable name (via the +[]+ function)
+and resolve its value, returning the value (which is converted to string)
+or <code>nil</code>.</p>
+</dd><dt><code>options</code>
+<dd>
+<p>hash of options. See below.</p>
+</dd></dl>
+
+<p>Options:</p>
+<dl class="rdoc-list note-list"><dt><code>:safe</code>
+<dd>
+<p><code>true</code> for a safe template that substitutes a blank string for a
+non-existent variable, instead of throwing an exception. Defaults to
+<code>true</code>.</p>
+</dd><dt><code>:var_pattern</code>
+<dd>
+<p>Regular expression pattern (as a string, not a Regexp object) to match a
+variable name. Defaults to “[A-Za-z0-9_]+”</p>
+</dd></dl>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="TemplateBase.html#method-c-new">Grizzled::String::Template::TemplateBase.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 209</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">resolver</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">resolver</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">var_re</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:var_pattern</span>, <span class="ruby-string">&quot;[A-Za-z0-9_]+&quot;</span>)
+  <span class="ruby-ivar">@long_var_regexp</span> = <span class="ruby-node">%r{\$\{(#{var_re})(\?[^\}]*)?\}</span>}
+  <span class="ruby-ivar">@short_var_regexp</span> = <span class="ruby-node">%r{\$(#{var_re})}</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-find_variable_ref" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_variable_ref</span><span
+            class="method-args">(s)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse the location of the first variable in the string. Subclasses should
+override this method.</p>
+
+<p>Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>s</code>
+<dd>
+<p>the string</p>
+</dd></dl>
+
+<p>Returns a <code>Variable</code> object, or <code>nil</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="find_variable_ref-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_variable_ref</span>(<span class="ruby-identifier">s</span>)
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_long_match</span>(<span class="ruby-identifier">m</span>)
+    <span class="ruby-identifier">name</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># Pull off the &quot;?&quot;</span>
+      <span class="ruby-identifier">default</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>][<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_no_long_match</span>(<span class="ruby-identifier">s</span>)
+    <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@short_var_regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>], <span class="ruby-keyword">nil</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@long_var_regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">handle_no_long_match</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">handle_long_match</span>(<span class="ruby-identifier">m</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-handle_long_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">handle_long_match</span><span
+            class="method-args">(m)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="handle_long_match-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_long_match</span>(<span class="ruby-identifier">m</span>)
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Pull off the &quot;?&quot;</span>
+    <span class="ruby-identifier">default</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>][<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">default</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-handle_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">handle_match</span><span
+            class="method-args">(m, s)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="handle_match-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 239</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-comment"># Odd number of backslashes before &quot;$&quot;, including</span>
+    <span class="ruby-comment"># the one with the dollar token (group 2). Valid escape.</span>
+
+    <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>)
+    <span class="ruby-identifier">start</span> = (<span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">b</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)])
+    <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-constant">ESCAPED_DOLLAR_PLACEHOLDER</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>[<span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>)<span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># Even number of backslashes before &quot;$&quot;, including the one</span>
+    <span class="ruby-comment"># with the dollar token (group 2). Not an escape.</span>
+    <span class="ruby-identifier">s</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-handle_no_long_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">handle_no_long_match</span><span
+            class="method-args">(s)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="handle_no_long_match-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 289</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_no_long_match</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-identifier">m</span> = <span class="ruby-ivar">@short_var_regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Variable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>), <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>], <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pre_sub" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pre_sub</span><span
+            class="method-args">(s)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Kludge to handle escaped “$”. Temporarily replace it with something highly
+unlikely to be in the string. Then, put a single “$” in its place, after
+the substitution. Must be sure to handle even versus odd number of
+backslash characters.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="pre_sub-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>)
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-comment"># Odd number of backslashes before &quot;$&quot;, including</span>
+      <span class="ruby-comment"># the one with the dollar token (group 2). Valid escape.</span>
+
+      <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">start</span> = (<span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">b</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)])
+      <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-constant">ESCAPED_DOLLAR_PLACEHOLDER</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>[<span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>)<span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># Even number of backslashes before &quot;$&quot;, including the one</span>
+      <span class="ruby-comment"># with the dollar token (group 2). Not an escape.</span>
+      <span class="ruby-identifier">s</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Check for an escaped &quot;$&quot;</span>
+  <span class="ruby-identifier">m</span> = <span class="ruby-constant">ESCAPED_DOLLAR</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">m</span>)
+    <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">s</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-substitute" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">substitute</span><span
+            class="method-args">(s)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Replace all variable references in the given string. <a
+href="Variable.html">Variable</a> references are recognized per the regular
+expression passed to the constructor. If a referenced variable is not found
+in the resolver, this method either:</p>
+<ul><li>
+<p>throws a <code>VariableNotFoundException</code> (if <code>safe</code> is
+<code>false</code>).</p>
+</li><li>
+<p>substitutes an empty string (if <code>safe</code> is <code>true</code>)</p>
+</li></ul>
+
+<p>Recursive references are supported (but beware of infinite recursion).</p>
+
+<p>Parameters:</p>
+<dl class="rdoc-list note-list"><dt><code>s</code>
+<dd>
+<p>the string in which to replace variable references</p>
+</dd></dl>
+
+<p>Returns the substituted result.</p>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="TemplateBase.html#method-i-substitute">Grizzled::String::Template::TemplateBase#substitute</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="substitute-source">
+            <pre><span class="ruby-comment"># File lib/grizzled/string/template.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">substitute</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-comment"># Kludge to handle escaped &quot;$&quot;. Temporarily replace it with</span>
+  <span class="ruby-comment"># something highly unlikely to be in the string. Then, put a single</span>
+  <span class="ruby-comment"># &quot;$&quot; in its place, after the substitution. Must be sure to handle</span>
+  <span class="ruby-comment"># even versus odd number of backslash characters.</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>)
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+        <span class="ruby-comment"># Odd number of backslashes before &quot;$&quot;, including</span>
+        <span class="ruby-comment"># the one with the dollar token (group 2). Valid escape.</span>
+
+        <span class="ruby-identifier">b</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">0</span>)
+        <span class="ruby-identifier">start</span> = (<span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">b</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)])
+        <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-constant">ESCAPED_DOLLAR_PLACEHOLDER</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>[<span class="ruby-identifier">m</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">0</span>)<span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment"># Even number of backslashes before &quot;$&quot;, including the one</span>
+        <span class="ruby-comment"># with the dollar token (group 2). Not an escape.</span>
+        <span class="ruby-identifier">s</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Check for an escaped &quot;$&quot;</span>
+    <span class="ruby-identifier">m</span> = <span class="ruby-constant">ESCAPED_DOLLAR</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">m</span>)
+      <span class="ruby-identifier">handle_match</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">s</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">s</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">s2</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">pre_sub</span>(<span class="ruby-identifier">s</span>))
+  <span class="ruby-identifier">s2</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">ESCAPED_DOLLAR_PLACEHOLDER</span>, <span class="ruby-string">&#39;$&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
