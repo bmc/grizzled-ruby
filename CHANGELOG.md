@@ -1,5 +1,10 @@
 # Change Log for Grizzled Ruby
 
+Version 0.1.8 (8 September, 2015)
+
+- Updated `Grizzled::FileUtil::Includer` to handle glob paths.
+- Fixed various tests and tested against Ruby 2.
+
 Version 0.1.5 (...)
 
 - Added `WrapMany` class.
