@@ -1,5 +1,12 @@
 # Change Log for Grizzled Ruby
 
+Version 0.1.9 (28 September, 2015)
+
+`Grizzled::FileUtil::Includer`:
+
+- Updated to sort globbed files, by default.
+- Fixed some edge cases in the handling of regular (non-URI) includes.
+
 Version 0.1.8 (8 September, 2015)
 
 - Updated `Grizzled::FileUtil::Includer` to handle glob paths.

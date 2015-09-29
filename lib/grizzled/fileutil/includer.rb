@@ -174,11 +174,14 @@ module Grizzled
       #                    or URL. Default: ^%include\s"([^"]+)"
       # allow_glob::       For file names, allow and expand glob expressions.
       #                    Doesn't apply to URLs.
+      # sort_glob:         true to force a sort of the globbed expression
+      #                    (default), false not to sort.
       def initialize(source, options={})
         @max_nesting = options.fetch(:max_nesting, 100)
         inc_pattern = options.fetch(:include_pattern, '^%include\s"([^"]+)"')
         @include_re = /#{inc_pattern}/
         @allow_glob = options.fetch(:allow_glob, false)
+        @sort_glob = options.fetch(:sort_glob, true)
         includer_source = source_to_includer_source source
         @source_uri = includer_source.uri
         @temp = preprocess includer_source
@@ -203,9 +206,9 @@ module Grizzled
 
       def source_to_includer_source(source)
         if source.class == String
-          open_source(URI::parse(source))
+          open_source(URI::parse(source), source)
         elsif source.class == File
-          open_source(URI::parse(source.path))
+          open_source(URI::parse(source.path), source.path)
         elsif source.respond_to? :each_line
           IncludeSource.new(source, nil)
         else
@@ -261,16 +264,17 @@ module Grizzled
               File.join(::File.dirname(cur_uri.path), source)
             )
             uri = FakeURI.new(abs)
+            source = abs
           end
         end
 
-        open_source(uri)
+        open_source(uri, source)
       end
 
       # Open an input source, based on a parsed URI.
-      def open_source(uri)
+      def open_source(uri, source)
         case uri.scheme
-          when nil then     f = open_path(uri.path)  # assume file/path
+          when nil then     f = open_path(source)  # assume file/path
           when 'file' then  f = open(uri.path)  # open path directly
           when 'http' then  f = open(uri.to_s)  # open-uri will handle it
           when 'https' then f = open(uri.to_s)  # open-uri will handle it
@@ -284,7 +288,9 @@ module Grizzled
 
       def open_path(path)
         if @allow_glob
-          FileIterator.new(Dir.glob(path))
+          globs = Dir.glob(path)
+          globs.sort! if @sort_glob
+          FileIterator.new(globs)
         else
           File.open(path)
         end

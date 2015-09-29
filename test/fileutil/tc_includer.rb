@@ -65,8 +65,8 @@ EOF
     end
   end
 
-  def test_glob
-    temps = ["/tmp/foo.txt", "/tmp/foo1.txt", "/tmp/foo2.txt"]
+  def test_glob_unsorted
+    temps = ["/tmp/foo.txt", "/tmp/boo1.txt", "/tmp/foo2.txt"]
     main = File.open(temps[0], "w")
     temp1 = File.open(temps[1], "w")
     temp2 = File.open(temps[2], "w")
@@ -84,15 +84,41 @@ EOF2
       temp1.close
       temp2.close
       File.open(main, "w") do |f|
-        f.write('%include "./foo[0-9]*.txt"\n')
+        f.write('%include "./?oo[0-9]*.txt"' +  "\n")
       end
 
-      inc = Includer.new(main, allow_glob: true)
+      main = File.open(temps[0])
+      inc = Includer.new(main, allow_glob: true, sort_glob: false)
       contents = inc.read
-      assert_equal("one-1\ntwo-1\none-2\ntwo-2\n", contents)
+      assert_true(contents.include?("one-1\ntwo-1"))
     ensure
       [main, temp1, temp2].each { |f| f.close unless f.closed? }
       temps.each { |path| File.delete(path) }
+    end
+  end
+
+  def test_glob_sorted
+    temps = ['/tmp/glob_z.txt', '/tmp/glob_a.txt', '/tmp/glob_m.txt']
+    main = "/tmp/glob_main.txt"
+    begin
+      temps.each do |t|
+        File.open(t, "w") do |f|
+          f.write("In #{t}\n")
+        end
+      end
+      File.open(main, "w") do |f|
+        f.write('%include "/tmp/glob_?.txt"' + "\n")
+      end
+
+      contents = File.open(main) do |f|
+        Includer.new(f, allow_glob: true).read
+      end
+      expected = temps.sort.map { |s| "In #{s}\n" }.join('')
+      puts("contents=#{contents}")
+      puts("expected=#{expected}")
+      assert_equal(expected, contents)
+    ensure
+      (temps + [main]).each { |path| File.delete(path) }
     end
   end
 

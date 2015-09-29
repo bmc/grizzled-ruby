@@ -3,8 +3,8 @@
 Gem::Specification.new do |s|
 
   s.name             = 'grizzled-ruby'
-  s.version          = '0.1.8'
-  s.date             = '2015-09-08'
+  s.version          = '0.1.9'
+  s.date             = '2015-09-28'
   s.summary          = 'Some general-purpose Ruby modules, classes, and tools'
   s.authors          = ['Brian M. Clapper']
   s.license          = 'BSD'
